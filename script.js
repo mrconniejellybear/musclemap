@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 (async () => {
+  
   // 1) Dynamic ES-module imports
   const THREE = await import('https://esm.sh/three@0.153.0');
   const { OBJLoader } = await import('https://esm.sh/three@0.153.0/examples/jsm/loaders/OBJLoader.js');
@@ -17,23 +18,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const body  = document.body;
 
-  // --- optional theme toggle (guarded) ---
-  const darkSheet  = document.getElementById('theme-dark');
-  const lightSheet = document.getElementById('theme-light');
-  const toggleBtn  = document.getElementById('themeToggle');
-  if (toggleBtn && darkSheet && lightSheet) {
-    toggleBtn.addEventListener('click', () => {
-      const darkEnabled = !darkSheet.disabled;
-      darkSheet.disabled = darkEnabled;
-      lightSheet.disabled = !darkEnabled;
-      localStorage.setItem('theme', darkEnabled ? 'light' : 'dark');
-    });
+  let isDragging = false;
 
+  // --- optional theme toggle (guarded) ---
+// --- Theme Toggle ---
+  // Updated IDs to match the index.html link tags
+  const darkSheet  = document.getElementById('dark-theme-sheet');
+  const lightSheet = document.getElementById('light-theme-sheet');
+  const themeToggleBtn  = document.getElementById('themeToggle');
+  
+  if (themeToggleBtn && darkSheet && lightSheet) {
+    // 1. Initial Load: Check localStorage
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
+    // If user prefers dark or system setting is dark, start dark
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      darkSheet.disabled = false;
+      lightSheet.disabled = true;
+    } else {
+      // Default to light (lightSheet is already enabled in HTML, darkSheet is disabled)
       darkSheet.disabled = true;
       lightSheet.disabled = false;
     }
+    
+    // 2. Click Handler: Toggle
+    themeToggleBtn.addEventListener('click', () => {
+      const isCurrentlyDark = !darkSheet.disabled;
+      
+      // Toggle the state
+      darkSheet.disabled = isCurrentlyDark;
+      lightSheet.disabled = !isCurrentlyDark;
+      
+      const nextTheme = isCurrentlyDark ? 'light' : 'dark';
+      localStorage.setItem('theme', nextTheme);
+      console.log(`Theme toggled to: ${nextTheme}`);
+    });
   }
 
   // ---------- Three.js Scene setup ----------
@@ -163,10 +181,6 @@ function setBoneOverlayEnabled(on) {
   });
 }
 
-// Example bindings:
-document.querySelector('#toggle-bones').addEventListener('change', (e) => {
-  setBoneOverlayEnabled(e.target.checked);
-});
 
 
 // Optional: switch blend mode (multiply/overlay/add)
@@ -451,7 +465,23 @@ scene.traverse(o => {
   // ---- Hover highlight + tooltip (does NOT override a selected mesh) ----
   let currentHover = null;
   container.addEventListener('pointermove', e => {
+
+    if (e.buttons === 1) { 
+      isDragging = true;
+    }
+    
+    // This disables hover effects *while* dragging
+    if (isDragging) {
+      hideTip();
+      if (currentHover && currentHover !== selectedMesh && currentHover.material?.emissive) {
+        currentHover.material.emissive.setHex(0x000000);
+      }
+      currentHover = null;
+      return; // Don't raycast for hover
+    }
+
     if (!model) return;
+    
     const rect = container.getBoundingClientRect();
     pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
     pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
@@ -491,27 +521,47 @@ scene.traverse(o => {
   container.addEventListener('pointerleave', hideTip);
 
   container.addEventListener('pointerdown', e => {
+    isDragging = false;
+  });
+  
+  // 2. New pointerup listener: This now handles all click/select logic.
+  container.addEventListener('pointerup', e => {
+    // If we dragged, 'isDragging' will be true. Do nothing.
+    // OrbitControls handled the rotation, and the selection is preserved.
+    if (isDragging) return;
+  
+    // If we're here, it was a 'click' (no move).
+    // Now we do the raycast to select or deselect.
     if (!model) return;
     const rect = container.getBoundingClientRect();
     pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
     pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
     raycaster.setFromCamera(pointer, camera);
     const hits = raycaster.intersectObject(model, true);
-
+  
     if (hits.length) {
+      // Clicked on a mesh: Select it
       const mesh = hits[0].object;
-
-      // This is a click, not just a selection change.
-      // We manage the selection state inside highlightMesh.
-      highlightMesh(mesh);
-
-
-      const meshName = (mesh.name || '').toLowerCase();
-      const key = Object.keys(MUSCLE_INFO).find(k => meshName.includes(k));
-      if (key) {
-        openSidebarWith(key);
-        // auto-zoom on click too (consistent with search)
-        autoZoomToKey(key, { duration: 900, fitRatio: 1.35 });
+      
+      // Only re-select and zoom if it's a *different* muscle
+      if (mesh !== selectedMesh) {
+        highlightMesh(mesh);
+  
+        const meshName = (mesh.name || '').toLowerCase();
+        const key = Object.keys(MUSCLE_INFO).find(k => meshName.includes(k));
+        if (key) {
+          openSidebarWith(key);
+          autoZoomToKey(key, { duration: 900, fitRatio: 1.35 });
+        }
+      }
+      
+    } else {
+      // Clicked on the background: Deselect
+      highlightMesh(null);
+      
+      // Call the new function (from Step 2) to clear the panel
+      if (window.clearSidebar) {
+        window.clearSidebar();
       }
     }
   });
