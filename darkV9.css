@@ -1,0 +1,737 @@
+/* Reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root{
+  --mm-topbar-h: 70px;
+  --mm-topbar-background: #0a0b13;
+
+  --main-color: #0a0b13;
+
+
+  --mm-border: #bebebe17;
+ 
+  --header-text: #ffffff;
+ 
+ 
+  --big-text: #c3c3c3;
+  --lil-text: #909090; font-size: 12px; font-weight: 300;
+  --link-text: #00a6ff;
+  --mm-select: #00a6ff;
+  --mm-highlight: #00a6ff4a;
+ 
+
+  --max-width: 1440px;
+
+  --content-space: 1.8rem;
+
+  --radius: 6px;
+
+  --mm-nav-w: 0px;
+  --mm-index-w: 190px;
+
+  --main-height: 680px;
+  --header-height: 50px;
+}
+
+
+
+a:hover{
+  text-decoration: underline;
+}
+
+body{ font-family: 'Roboto Flex', sans-serif; background: var(--main-color); color: var(--mm-text);
+}
+
+
+.mm-topbar{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--mm-topbar-h);
+  background-color: var(--mm-topbar-background);
+  z-index: 1300; 
+  display: flex; align-items: center;
+  padding-top: 0px;
+  padding-bottom: 0px;
+ 
+  background-image: linear-gradient(90deg, #318eff22, #318eff22);
+  transform: scaleX(1);  
+  background-repeat:no-repeat;
+  background-size: 100% 0px;
+  background-position: 0 100%; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0); 
+  border-bottom: 1px solid var(--mm-border);
+}
+.mm-topbar::after{
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0px; height: 0px;
+  background: linear-gradient(90deg, #014580, #006aff, #0eb3ff, #014580); 
+  box-shadow: 1px 0px 2px #38c3ffec;/* reversed */
+  transform: scaleX(0);                 /* start hidden */
+  transform-origin: left;               /* wipe left→right */
+  transition: transform 1s ease;       /* smooth */
+  pointer-events: none;                 /* ignore mouse */
+}
+.mm-topbar:hover::after,
+.mm-topbar:focus-within::after{  
+  background: linear-gradient(90deg,#003b6f, #00aaff, #0059ff, #003b6f);  
+  box-shadow: 1px 0px 3px #46acffd9;      /* keyboard too */
+  transform: scaleX(1);                 /* cover the base line */
+}
+@media (prefers-reduced-motion: reduce){
+  .mm-topbar::after{transform: 1s ease;transform: scaleX(1); }
+}
+.mm-topbar.is-armed::after{
+  transform: scaleX(1);
+}
+.mm-topbar.is-armed.is-leaving::after{
+  transform: translateX(100%) scaleX(1);
+}
+
+.mm-topbar .topbar-inner{ width: 100%; max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex; align-items: center; gap: 20px;
+  padding-left: 3rem; padding-right: 3rem;
+}
+
+.mm-topbar .brand{ display:flex; align-items:center; text-decoration:none;position: relative;}
+.mm-topbar .brand img{height:34px; margin-bottom: 3px; width: auto; display:block; }
+.mm-topbar .brand2{ display:flex; align-items:center; text-decoration:none; position: relative;}
+.mm-topbar .brand2 img{ height: 34px; margin-bottom: 1px; width: auto; display:block; }
+.mm-topbar .toplinks{ display:flex; gap:2rem; font-size: 12px; font-weight: 380; 
+position: absolute; right: 15rem;}
+.association{
+  color: #fff;
+}
+
+.mm-topbar .toplinks .link{ padding: 8px; text-decoration: none; 
+  color:#fff;
+  border: 0px solid #0d2644;
+}
+.mm-topbar .toplinks .link:hover{
+  color: #fff; padding: 8px; border-radius: 12px;
+}
+.mm-topbar .toplinks .link {
+  display: flex;
+  align-items: center;
+  gap:6px;
+}
+.link{
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Main content area */
+.mm-content{
+  padding-top: var(--mm-topbar-h);
+  margin: 0 auto;
+  max-width: var(--max-width);
+  background-color: var(--main-color);
+}
+.layout-wrapper {
+  padding:1rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  margin: 0 auto;
+  justify-content: center;
+  display: flex;
+  align-items: flex-start;
+
+}
+
+/* Separator */
+.mm-sep1{ height:1px; background: var(--mm-border);   max-width: var(--max-width); margin: 0 auto;
+margin-bottom: 1rem;}
+.mm-sep2{ height:1px; background:var(--mm-border);}
+.mm-sep3{ flex: 0 0 1px; height: 26px; align-self: center;  color:var(--mm-border);}
+.mm-sep4{ flex: 0 0 1px; height: 16px; align-self: center; background: var(--mm-border);}
+.mm-sep5{ height:0px; background:var(--mm-border); margin-bottom: 10px;}
+.mm-sep6{ height: var(--main-height); width: 1px; background-color: var(--mm-border); margin-left: var(--content-space); margin-right: var(--content-space);}
+.mm-sep7{ height: var(--main-height); width: 0px; background-color: var(--mm-border); margin-right: var(--content-space)}
+
+.resizer{
+ cursor: ew-resize; position: relative; top: 300px; color: var(--lil-text); margin: -1rem;
+}
+
+/* Hover tooltip */
+.mm-tooltip{
+  position: fixed; pointer-events:none;
+  background: #ffffff; color: var(--lil-text);
+  font-size: 12px; 
+  font-weight:400; 
+  padding:.7rem;
+  border:1px solid var(--mm-border); 
+  border-radius:8px;
+  opacity:0; transform: translate(12px,12px);
+  transition: opacity 120ms ease; z-index:1000;
+}
+.mm-tooltip.show{ opacity:0.9; }
+
+
+.viewer-instruction{
+  font-size: 12px; color: var(--lil-text); line-height: 1.5rem; 
+  margin: 0 auto; padding:1rem 2.4rem;
+  justify-content: center;
+  max-width: var(--max-width);
+  text-align: left;
+}
+.link-explain{
+  font-size: 12px; color: var(--lil-text); 
+  height: var(--notify-h, auto);
+  text-align: left;
+  align-items: center;
+  align-content:left;
+  gap: 0.2rem;
+  display: flex;
+}
+.link-explain a{
+  text-decoration: none;
+  color: var(--link-text);
+}
+.link-explain a:hover{
+  text-decoration: underline;
+  color: var(--link-text);
+}
+
+/* --------- Viewer --------- */
+.viewer-container{
+  flex: 1 1 0;
+  min-width: 300px;
+  max-width: 640px;
+  display:flex; flex-direction:column; align-items:center;
+  transition:flex .3s ease;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0);
+
+}
+.viewer-box {
+  position: relative;
+  /* CHANGE: Allow viewer to fill remaining width */
+  flex-grow: 1;
+  height: 100%; /* Fill parent height */
+  background: #000000;
+  overflow: hidden;
+  border-radius: 8px;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+}
+.viewer-frame{
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row; 
+  height: var(--main-height);  
+  align-items: stretch;
+}
+
+.viewer-attribution{
+  height: var(--notify-h, auto);
+  background: none;
+  font-size: 11px;
+  align-items:center;
+  width: 576px;
+  color: var(--lil-text);
+  text-align: center;
+  padding-top: 0.6rem;
+  pointer-events: auto;
+}
+.viewer-attribution a{
+  color: var(--link-text);
+  text-decoration: none;
+  border-radius: var(--radius);
+  pointer-events: auto;
+}
+.viewer-attribution p{
+  display:flex; align-items:center; justify-content:left;
+  gap: 0.3rem;
+}
+
+.hud-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0.6rem;
+  background: none;
+  border: none;
+}
+
+.hud-btn svg{
+  color: #fff;
+  box-shadow: 0px 1px 20px #000000a0;
+  border-radius: 999px;
+}
+.hud-btn svg:hover{
+  color: var(--mm-select);
+  cursor: pointer;
+}
+
+.viewer-hud-right {
+  position: absolute;
+  bottom: 0.4rem;
+  right: 0.4rem;
+  display: flex;
+  align-items: center;
+  background-color: #60606000;
+  margin: 0.2rem;
+  padding: 0.3rem;
+  border-radius: var(--radius);
+}
+
+.viewer-box .zoom-btn{
+  pointer-events: auto;
+  padding: 0.4rem;
+  border-radius:999px;
+  border:none; background:none; color:#ffffff;
+  display:grid; place-items:center;
+  transition: transform 1s ease, box-shadow .5s ease, border-color 1s ease;
+}
+.zoom-btn:hover{
+background-color: var(--mm-highlight);
+color: var(--mm-select);
+padding: 0.4rem;
+cursor: pointer;
+}
+
+
+/* --------- Controls --------- */
+.controls{
+  background-color: #5b5b5b2e;
+  width: 50px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center icons horizontally */
+  justify-content: flex-start; /* Start from top */
+  margin: 0.2rem;
+  padding-bottom: 0.5rem;
+  padding-top: 1.4rem;
+  color: #fff;
+  font-size: 12px;
+  gap: 0.7rem;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+  border-radius: var(--radius);
+}
+
+/* ADD THIS BLOCK to BOTH CSS files */
+/* Collapsible container for the buttons */
+.controls-collapsible {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  overflow: hidden; /* Important for clean transition */
+  transition: max-height 0.3s ease, padding-top 0.3s ease;
+  max-height: 400px; /* arbitrary large value for 'open' state */
+  padding-bottom: 0.5rem;
+  width: 100%;
+}
+
+/* State when the controls are collapsed */
+.controls.is-closed .controls-collapsible {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* Move separator to the collapsible part, but hide it when collapsed */
+.controls .mm-sep4 {
+  width: 70%;
+  height: 1px;
+  margin: 4px 0;
+  background: var(--mm-border);
+}
+
+.controls.is-closed .mm-sep4 {
+  margin: 0;
+  height: 0;
+}
+
+/* The chevron at the bottom */
+.controls-bottom {
+  /* ... existing styles ... */
+  cursor: pointer;
+  padding: 0.8rem; /* Keep this the same as padding-bottom in controls for centered toggle */
+  color: var(--lil-text);
+  display: flex;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.controls.is-closed .controls-bottom svg {
+  transform: rotate(180deg); /* Rotate chevron when closed */
+}
+
+/* Update the main controls container to remove the conflicting padding */
+.controls {
+  /* ... existing styles ... */
+  padding-bottom: 0; /* REMOVE THIS PADDING from .controls */
+  /* Keep all other styles as-is */
+}
+
+.controls label{ display:flex; align-items:left; }
+.controls input{ margin-right:10px; }
+
+.controls-bottom {
+  padding: 0.8rem;
+  color: var(--lil-text);
+  display: flex;
+  justify-content: center;
+}
+.controls .mm-sep4 {
+  width: 70%;     /* Width relative to sidebar width */
+  height: 1px;    /* Height of the line */
+  margin: 4px 0;
+  background: var(--mm-border);
+}
+
+.ctrl-tog{
+  cursor: pointer;
+  color: #fff;
+}
+
+/* --- Texture Toggle Styles --- */
+.viewer-hud-left {
+  position: absolute;
+  bottom: 0.1rem;
+  left: 0.1rem;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 400;
+  background:none;
+  padding: 7px 7px;
+  border-radius: var(--radius);
+  font-size: 12px;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.panel-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  position: sticky;
+  top: calc(var(--mm-topbar-h) + 2rem);
+  height: calc(94vh - var(--mm-topbar-h) - 3rem);
+}
+
+
+.mm-panel{
+  width: 560px;
+  height: var(--main-height);
+  background: #ffffff00;
+  box-shadow: -3px 1px 10px rgba(0, 0, 0, 0); 
+  z-index: 900;
+  border: 0px solid var(--mm-border);
+  border-radius: var(--radius);
+  
+  opacity: 1;
+  pointer-events: auto;
+  transition: width 0.28s ease, opacity 0.28s ease, padding 0.28s ease, margin 0.28s ease;
+  display: flex;
+  flex-direction: column;
+}
+.panel-content {
+  margin-top: var(--content-space);
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 40% 1fr;
+  gap: 1.4rem;
+  align-items: start;
+}
+
+#muscleImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 1rem;
+}
+.info-text {
+  display: flex;
+  flex-direction: column;
+  gap:8px;
+}
+.mm-panel-section{
+  display: flex;
+  flex-direction: column;
+  gap:8px;
+}
+
+.muscleName{
+  font-size: 22px;
+  font-weight: 600;
+  padding-right: 0.8rem;
+  color: var(--header-text);
+}
+
+.section-label{
+  display: flex;
+  color: var(--header-text);
+  font-size: 16px;
+  }
+  .section-label h3{
+    gap: 0.3rem;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    font-weight: 600;
+    color: var(--big-text);
+    }
+    .section-label svg{
+    color: var(--lil-text);
+    }
+
+
+/* Optional: Ensure the icon and text align well */
+.info-text .section-label h3 {
+  padding-left: 0;
+  margin-top: 0;
+}
+
+.mm-panel-section h3{line-height:1.5;font-size: 17px; color:var(--big-text); font-weight: 600;}
+
+.mm-panel-section p{ line-height:1.5; color: var(--lil-text);}
+#exerciseList{ list-style:none; margin:0; padding:0; }
+#exerciseList li{ color: var(--lil-text); display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;}
+#exerciseList li a{ color: var(--link-text); text-decoration:none; }
+#exerciseList li a:hover{ text-decoration:underline; }
+
+
+html, body { overflow-x: hidden;}
+
+.index-label{
+  width: 190px;
+  background-color: var(--main-color);
+  position:absolute;
+  height: var(--header-height);
+  align-content:center;
+  align-items: center;
+  border-radius: 3px 3px 0px 0px;
+  border-bottom: 1px solid var(--mm-border);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0)
+
+}
+.index-label p{
+  width: var(--mm-index-w);
+  color: var(--big-text);
+  margin: 1rem;
+  margin-left: 0.8rem;
+  align-content:center;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.muscle-index {
+  width: var(--mm-index-w);
+  background: #ffffff00;
+  border-left: 0px solid var(--mm-border);
+  border-radius: var(--radius);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0);
+  height: var(--main-height);
+  overflow-y: auto;
+}
+
+.mi-list {
+  margin-top: var(--header-height);
+  list-style: none;
+}
+.mi-list button {
+  all: unset;
+  box-sizing: border-box;
+  width: 100%;
+  height: 30px;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--lil-text);
+  display: flex;
+  align-items: center;
+  padding-left: 0px;
+  opacity: 1;
+  border-bottom: 1px solid var(--mm-border);
+ letter-spacing: normal;
+}
+.mi-list button:hover {
+  color: var(--mm-select);
+}
+.mi-list button.is-active {
+  opacity: 1;
+  position: relative;
+  background: var(--mm-highlight);
+  border-radius: 3px;
+  padding-left: 0.8rem;
+  color: var(--mm-select);
+}
+
+.mi-search:focus-within .mm-search-icon{ opacity:1; }
+ 
+/* Find this rule (line 406) */
+.mi-search{
+  opacity: 1;
+  width: 100%; /* CHANGE this from 53% to 100% */
+  padding: 12px;
+  border: 0px solid var(--mm-border);  
+  padding-left: 37px;   
+  border-radius: 8px; background:#4f4f4f20;
+  box-shadow: 1px 1px 4px #00000000;
+  transition: 0.2s ease;
+  border:1px solid #00000000;   
+}
+/* Find this rule (line 414) */
+.searchy{
+  margin: 0rem;
+  margin-bottom: var(--content-space);
+  position: relative;
+  display: flex;
+  gap: 0.8rem
+  ;
+  align-items: center; 
+  justify-content: center; /* DELETE this line */
+  width: 100%; /* ADD this line */
+}
+.searchy svg{
+color: var(--lil-text);
+}
+/* Replace your old rule (line 404) with this */
+.searchy:focus-within .mm-search-icon { 
+  color: var(--mm-select); /* Makes the icon blue on focus */
+}
+.mi-search:hover{
+  outline: none;
+  opacity: 1;
+  padding:12px;
+  border:1px solid var(--mm-select);   
+  padding-left: 37px;  
+  border-radius:8px; background: #4f4f4f20;
+  box-shadow: 2px 1px 10px #1e78ff00;
+  transition: 0.2s ease;
+}
+
+/* Replace the old rule (line 425) with this */
+.mm-search-icon{
+  position: absolute;
+  left: 14px; 
+  top: 48%; /* Centers it vertically */
+  transform: translateY(-50%); /* ...perfectly */
+  pointer-events: none; /* Lets you click 'through' the icon */
+  color: #aaa; /* A muted color for the icon */
+  width: 17px;
+  height: 17px;
+  transition: color 0.2s ease;
+}
+
+.instructions{
+  font-size: var(--lil-text); color: var(--lil-text); line-height: 1.5rem; 
+  margin: 0 auto; padding:2.4rem;
+  padding-bottom: 6rem;
+  justify-content: left;
+  max-width: var(--max-width);
+  border-top:1px solid var(--mm-border);
+  background-color: var(--main-color);
+  text-align: left;
+}
+.instructions svg{
+color: #003979;
+}
+.instructions svg:hover{
+  color: var(--mm-select);}
+.instructions a{ color: var(--link-text);
+  text-decoration: none;}
+.instructions-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 60/40 split for left/right columns */
+  gap: 6rem; /* Space between the columns */
+  padding-left: 6rem;
+  padding-right: 6rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+.disclaimer{
+  height: var(--notify-h, auto);
+  font-size: 10px; color: var(--lil-text); 
+  margin: 0 auto; padding:0.4rem ;
+  justify-content: left;
+  max-width: var(--max-width);
+  text-align: left;
+  border: 1px solid var(--mm-border);
+  background-color: #e7e7e7;
+  justify-content: center;
+}
+.disclaimer p{
+  align-content:center;
+  display: flex; gap: 0.4rem;
+padding-left: 2.8rem}
+.instructions-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Creates the 2 columns */
+  gap: 1rem 2rem; /* Keeps your 1.4rem vertical gap and adds a 2rem horizontal gap */
+}
+.instructions dt{
+  align-content:center;
+  display: flex;
+  align-items: center;
+
+  gap: 0.4rem;
+  font-weight: 600; color: var(--big-text);
+}
+
+.soapbox {
+  font-size: var(--lil-text); 
+  color: var(--lil-text); 
+  line-height: 1.5rem; 
+  text-align: left; /* This is the key change */
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem; /* This adds space between your paragraphs */
+}
+
+
+.credits{
+  font-size: 11px; color: #e7e7e7; text-align: center; line-height: 1.5rem; 
+  margin: 0 auto;
+}
+
+.credit-box{
+  border-top: 1px solid var(--mm-border);
+  background-color: #1c1c1c;
+  padding: 2.4rem;
+}
+
+
+.references{
+  padding-top: calc(var(--mm-topbar-h) + 2rem);
+  font-size: 12px; color: var(--lil-text); text-align: left; line-height: 1.5rem; 
+  margin: 0 auto; 
+  justify-content: left;
+  max-width: var(--max-width);
+  background-color: #f8f8f8;
+  height: 90vh;
+}
+.references h2{
+  font-size: 13px; color: var(--big-text); text-align: left; line-height: 2rem; 
+  margin: 0 auto; 
+  font-weight: 500;
+  justify-content: left;
+  padding-left: 6rem;
+}
+.ref-links{
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  line-height: 2rem;
+  padding-left: 6rem;
+}
+.ref-links2{
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  line-height: 2rem;
+  padding-left: 6rem;
+}
