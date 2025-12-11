@@ -9,7 +9,7 @@ window.MUSCLE_INFO = window.MUSCLE_INFO || {
     description: "The trapezius are two (L and R) flat, superficial muscles that cover the upper posterior thorax and neck. It's name comes from its trapezoid like shape.", head: 'While the traps do not have mutiple heads, they are divided horizontally into three areas: The upper, middle, and lower fiber regions, as pictured.', function: 'Scapular elevation, retraction, and depression; assists with neck extension and posture.', exercises: ['Barbell Shrug', 'Face Pull', 'Cable Row'], explanation: 'Because this muscle retracts and elevates the scapulae, rowing and shrugging movements keep it under tension through scapular motion and load.'
   },
   deltoid: {
-    title: 'Deltoid (Shoulder)', img: 'Deltoid_muscle_frontal-1.png', 
+    title: 'Deltoid (Shoulder)', img: 'Deltoid_muscle_animation2.gif', 
     description: "When a person says they're training their shoulders, they're really referring their deltoids. Named after the Greek letter delta (Δ), deltoids are a triangular muscle that cap the shoulder.", head: 'There are three heads of the deltiod: the anterior, lateral, and posterior.', function: 'Shoulder abduction (lateral), flexion/internal rotation (anterior), extension/external rotation (posterior).', exercises: ['Overhead Press', 'Lateral Raise', 'Rear Delt Fly'], explanation: 'Because this muscle abducts and rotates the shoulder, pressing and raise patterns load specific heads across the range of motion.'
 
   }, 
@@ -124,7 +124,7 @@ window.MUSCLE_INFO = window.MUSCLE_INFO || {
     title: 'Flexor Digitorum Superficialis', img: 'flexor_digitorum_superficialis.jpg', description: 'This muscle gets its name from flexing the fingers at a superficial layer.', head: 'Humero-ulnar and radial heads.', function: 'Flexes proximal interphalangeal joints and assists wrist flexion.', exercises: ['Plate Pinch', 'Towel Grip Hang', 'Cable Finger Curl'], explanation: 'Because this muscle flexes the fingers, gripping and finger-curl tasks load it through the forearm.'
   },
   flexor_digitorum_profundus: {
-    title: 'Flexor Digitorum Profundus', img: 'flexor_digitorum_profundus.jpg', description: 'This muscle gets its name from being the deep finger flexor.', head: 'No distinct heads; deep forearm flexor.', function: 'Flexes distal interphalangeal joints; assists wrist flexion.', exercises: ['Thick-Bar Hold', 'Captains of Crush', 'Finger Curl (heavy)'], explanation: 'Because this muscle flexes the fingertips, heavy grip and finger-curl work load it through long tendons.'
+    title: 'Flexor Digitorum Profundus', img: '640px-Inferior_view_of_flexor_digitorum_longus_muscle_-_animation.gif', description: 'This muscle gets its name from being the deep finger flexor.', head: 'No distinct heads; deep forearm flexor.', function: 'Flexes distal interphalangeal joints; assists wrist flexion.', exercises: ['Thick-Bar Hold', 'Captains of Crush', 'Finger Curl (heavy)'], explanation: 'Because this muscle flexes the fingertips, heavy grip and finger-curl work load it through long tendons.'
   }, 
   flexor_pollicis_longus: {
     title: 'Flexor Pollicis Longus', img: 'flexor_pollicis_longus.jpg', description: 'This muscle gets its name from flexing the thumb (pollex).', head: 'No distinct heads; deep forearm flexor.', function: 'Flexes thumb interphalangeal joint; assists wrist flexion.', exercises: ['Thumb Pinch Carry', 'Rubber-Band Thumb Flexion', 'Cable Thumb Curl'], explanation: 'Because this muscle flexes the thumb, targeted pinch and flexion drills maintain specific tension.'
@@ -222,10 +222,10 @@ window.MUSCLE_INFO = window.MUSCLE_INFO || {
     title: 'Fibularis Longus (peroneus)', img: 'fibularis_longus.jpg', description: 'This muscle gets its name from its long path along the fibula on the lateral leg.', head: 'No distinct heads; lateral compartment.', function: 'Eversion and plantarflexion; supports the transverse arch.', exercises: ['Banded Eversion', 'Cable Ankle Eversion', 'Single-Leg Balance (eversion bias)'], explanation: 'Because this muscle everts the foot, resisted eversion maintains tension along its lateral line.'
   },
   gastrocnemius: {
-    title: 'Gastrocnemius (Calf)', img: 'gastrocnemius.jpg', description: 'This muscle gets its name from its “stomach of the leg” bulge; superficial calf.', head: 'Medial and lateral heads.', function: 'Plantarflexion of the ankle; assists knee flexion.', exercises: ['Standing Calf Raise', 'Donkey Calf Raise', 'Single-Leg Calf Raise'], explanation: 'Because this muscle crosses knee and ankle, straight-knee calf raises place it under maximal stretch-tension.'
+    title: 'Gastrocnemius (Calf)', img: 'Gastrocnemius_muscle_-_animation.gif', description: 'This muscle gets its name from its “stomach of the leg” bulge; superficial calf.', head: 'Medial and lateral heads.', function: 'Plantarflexion of the ankle; assists knee flexion.', exercises: ['Standing Calf Raise', 'Donkey Calf Raise', 'Single-Leg Calf Raise'], explanation: 'Because this muscle crosses knee and ankle, straight-knee calf raises place it under maximal stretch-tension.'
   },
   soleus: {
-    title: 'Soleus', img: 'soleus.jpg', description: 'This muscle gets its name from its fish-like shape (solea).', head: 'No distinct heads; deep to gastrocnemius.', function: 'Plantarflexion of the ankle; postural endurance muscle.', exercises: ['Seated Calf Raise', 'Bent-Knee Calf Raise', 'Farmer’s Carry on Toes'], explanation: 'Because this muscle works with a bent knee, seated calf raises isolate it under sustained tension.'
+    title: 'Soleus', img: 'Triceps_surae_-_animation.gif', description: 'This muscle gets its name from its fish-like shape (solea).', head: 'No distinct heads; deep to gastrocnemius.', function: 'Plantarflexion of the ankle; postural endurance muscle.', exercises: ['Seated Calf Raise', 'Bent-Knee Calf Raise', 'Farmer’s Carry on Toes'], explanation: 'Because this muscle works with a bent knee, seated calf raises isolate it under sustained tension.'
   },
   tibialis_posterior: {
     title: 'Tibialis Posterior', img: 'tibialis_posterior.jpg', description: 'This muscle gets its name from its position posterior to the tibia.', head: 'No distinct heads; deep posterior compartment.', function: 'Inversion and plantarflexion; key support for the medial arch.', exercises: ['Banded Inversion', 'Heel Raise with Inversion', 'Short Foot Drill'], explanation: 'Because this muscle inverts and supports the arch, inversion-biased calf work and foot drills load it specifically.'
@@ -468,4 +468,3 @@ topbar.addEventListener('mouseleave', () => {
 
   
 })();
-
