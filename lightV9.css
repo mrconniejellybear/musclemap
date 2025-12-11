@@ -16,7 +16,7 @@
   --radius: 6px;
 
   --mm-nav-w: 0px;
-  --mm-index-w: 190px;
+  --mm-index-w: 180px;
 
   --main-height: 680px;
   --header-height: 50px;
@@ -129,12 +129,15 @@ margin-bottom: 1rem;}
 /* Hover tooltip */
 .mm-tooltip{
   position: fixed; pointer-events:none;
-  background: #ffffff; color: var(--lil-text);
+  background-color: #00000047;
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--mm-border);
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.337);
+  border-radius: 30px;
+  color: #fff;
   font-size: 12px; 
   font-weight:400; 
-  padding:.7rem;
-  border:1px solid var(--mm-border); 
-  border-radius:8px;
+  padding:1rem;
   opacity:0; transform: translate(12px,12px);
   transition: opacity 120ms ease; z-index:1000;
 }
@@ -187,7 +190,7 @@ margin-bottom: 1rem;}
   height: 100%; /* Fill parent height */
   background-image: radial-gradient(circle at center, #060606, #000000);
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 20px;
   display: flex; 
   align-items: center; 
   justify-content: center;
@@ -200,28 +203,38 @@ margin-bottom: 1rem;}
   height: var(--main-height);  
   align-items: stretch;
 }
+/* --- Loading Spinner Overlay --- */
+.loader-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Dark semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50; /* Above canvas (0) but below HUD buttons (100) */
+  backdrop-filter: blur(2px);
+  transition: opacity 0.3s ease;
+}
 
-.viewer-attribution{
-  height: var(--notify-h, auto);
-  background: none;
-  font-size: 11px;
-  align-items:center;
-  width: 576px;
-  color: var(--lil-text);
-  text-align: center;
-  padding-top: 0.6rem;
-  pointer-events: auto;
+.loader-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
-.viewer-attribution a{
-  color: var(--link-text);
-  text-decoration: none;
-  border-radius: var(--radius);
-  pointer-events: auto;
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
-.viewer-attribution p{
-  display:flex; align-items:center; justify-content:left;
-  gap: 0.3rem;
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
+
 
 .hud-btn {
   width: 100%;
@@ -244,20 +257,26 @@ margin-bottom: 1rem;}
 
 .viewer-hud-right {
   position: absolute;
-  bottom: 0.4rem;
-  right: 0.4rem;
+  background-color: #5b5b5b2e;
+  backdrop-filter: blur(9px);
+  border: 1px solid #aaaaaa14;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+  border-radius: 30px;
+  bottom: 0.1rem;
+  right: 0.1rem;
   display: flex;
   align-items: center;
-  background-color: #60606000;
-  margin: 0.2rem;
-  padding: 0.3rem;
-  border-radius: var(--radius);
+  margin: 1rem;
+  padding: 0.5rem;
+  border-radius: 20px;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .viewer-box .zoom-btn{
   pointer-events: auto;
   padding: 0.4rem;
-  border-radius:999px;
+  border-radius: 20px;
   border:none; background:none; color:#ffffff;
   display:grid; place-items:center;
   transition: transform 1s ease, box-shadow .5s ease, border-color 1s ease;
@@ -273,22 +292,20 @@ cursor: pointer;
 /* --------- Controls --------- */
 .controls{
   background-color: #5b5b5b2e;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(9px);
   border: 1px solid #aaaaaa14;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
   width: 50px;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center; /* Center icons horizontally */
   justify-content: flex-start; /* Start from top */
-  margin: 0.2rem;
-  padding-bottom: 0.4rem;
-  padding-top: 1rem;
+  margin: 0.6rem;
+  padding-top: 1.2rem;
   color: #fff;
   font-size: 12px;
-  gap: 0.7rem;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
-  border-radius: var(--radius);
 }
 
 /* ADD THIS BLOCK to BOTH CSS files */
@@ -297,7 +314,7 @@ cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.7rem;
+  gap: 0.6rem;
   overflow: hidden; /* Important for clean transition */
   transition: max-height 0.3s ease, padding-top 0.3s ease;
   max-height: 400px; /* arbitrary large value for 'open' state */
@@ -329,7 +346,8 @@ cursor: pointer;
 .controls-bottom {
   /* ... existing styles ... */
   cursor: pointer;
-  padding: 0.4rem; 
+  padding-bottom: 1rem; 
+  padding-top: 0.2rem; 
   color: var(--lil-text);
   display: flex;
   justify-content: center;
@@ -372,12 +390,10 @@ cursor: pointer;
   font-weight: 400;
   background:none;
   padding: 7px 7px;
-  border-radius: var(--radius);
   font-size: 12px;
   pointer-events: auto;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
 }
 
 .panel-group {
@@ -495,7 +511,7 @@ cursor: pointer;
 html, body { overflow-x: hidden;}
 
 .index-label{
-  width: 190px;
+  width: 180px;
   background-color: var(--main-color);
   position:absolute;
   height: var(--header-height);
@@ -552,8 +568,8 @@ html, body { overflow-x: hidden;}
   opacity: 1;
   position: relative;
   background: var(--mm-highlight);
-  border-radius: 3px;
-  padding-left: 0.8rem;
+  border-radius: 4px;
+  padding-left: 6px;
   color: var(--mm-select);
 }
 .mi-search:focus-within .mm-search-icon{ opacity:1; }
@@ -561,17 +577,16 @@ html, body { overflow-x: hidden;}
 .mi-search{
   opacity: 1;
   width: 100%;
-  padding: 12px;
-  border: 0px solid var(--mm-border);  
-  padding-left: 37px;   
-  border-radius: 8px; background:#4f4f4f20;
+  padding: 13px;
+  border: 1px solid #00000000;    
+  border-radius: 40px; background:#4f4f4f20;
   box-shadow: 1px 1px 4px #00000000;
-  transition: 0.2s ease;
-  border:1px solid #00000000;   
+  padding-left: 40px; 
+  transition: 0.2s ease; 
 }
 .searchy{
   margin-top: 0.1rem;
-  margin-bottom: var(--content-space);
+  margin-bottom: 1.4rem;
   position: relative;
   display: flex;
   gap: 0.8rem;
@@ -588,10 +603,8 @@ color: var(--lil-text);
 .mi-search:hover{
   outline: none;
   opacity: 1;
-  padding:12px;
-  border:1px solid var(--mm-select);   
-  padding-left: 37px;  
-  border-radius:8px; background: #4f4f4f20;
+  padding: 13px;
+  border: 1px solid var(--mm-select);   
   box-shadow: 2px 1px 10px #1e78ff00;
   transition: 0.2s ease;
 }
@@ -599,8 +612,8 @@ color: var(--lil-text);
 /* Replace the old rule (line 425) with this */
 .mm-search-icon{
   position: absolute;
-  left: 14px; 
-  top: 48%; /* Centers it vertically */
+  left: 19px; 
+  top: 50%; /* Centers it vertically */
   transform: translateY(-50%); /* ...perfectly */
   pointer-events: none; /* Lets you click 'through' the icon */
   color: #aaa; /* A muted color for the icon */
@@ -611,7 +624,7 @@ color: var(--lil-text);
 
 .instructions{
   font-size: var(--lil-text); color: var(--lil-text); line-height: 1.5rem; 
-  margin: 0 auto; padding-top:3rem;
+  margin: 0 auto; padding-top:2rem;
   padding-bottom: 6rem;
   font-size: 12px;
   justify-content: left;
