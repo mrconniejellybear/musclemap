@@ -281,20 +281,54 @@ scene.traverse(o => {
     .then(() => console.log('✅ Textures preloaded'))
     .catch(err => console.warn('Texture preload issue:', err));
 
-  // Apply texture (uses cache; defers if model not ready)
+// -------------------------------------------------------------
+  // NEW: Helper to toggle the spinner
+  // -------------------------------------------------------------
+  const loaderEl = document.getElementById('texture-loader');
+  function toggleLoader(show) {
+    if (!loaderEl) return;
+    if (show) loaderEl.classList.remove('hidden');
+    else loaderEl.classList.add('hidden');
+  }
+
+  // -------------------------------------------------------------
+  // REPLACEMENT: applyTexture with loading logic
+  // -------------------------------------------------------------
   function applyTexture(url) {
+    // 1. Show Loader immediately
+    toggleLoader(true);
+
     const useTex = (tex) => {
-      if (!model) { pendingTextureURL = url; return; }
+      // Safety check: if model isn't ready yet
+      if (!model) { 
+        pendingTextureURL = url; 
+        toggleLoader(false); // Hide spinner, we are just queuing it
+        return; 
+      }
+
       model.traverse(ch => {
         if (ch.isMesh) {
           ch.material.map = tex;
           ch.material.needsUpdate = true;
         }
       });
+      
+      // 2. Hide Loader once applied
+      // A small 100ms delay ensures the UI doesn't flash too quickly
+      setTimeout(() => toggleLoader(false), 100);
     };
+
     const cached = textureCache.get(url);
-    if (cached) useTex(cached);
-    else loadTex(url).then(useTex).catch(err => console.error('Texture load error', err));
+    if (cached) {
+      useTex(cached);
+    } else {
+      loadTex(url)
+        .then(useTex)
+        .catch(err => {
+          console.error('Texture load error', err);
+          toggleLoader(false); // Important: Hide spinner even if it fails!
+        });
+    }
   }
 
   // initial texture (remember choice)
@@ -424,99 +458,136 @@ scene.traverse(o => {
     return true;
   }
   // Smoothly fit/zoom camera to a mesh (OrbitControls-friendly)
-  function zoomToMesh(mesh, opts = {}) {
-    if (!mesh || !camera) return;
-    const { duration = 900, fitRatio = 1.35 } = opts;
+ // Smoothly fit/zoom camera to a mesh AND rotate to face it
+ function zoomToMesh(mesh, opts = {}) {
+  if (!mesh || !camera) return;
+  const { duration = 900, fitRatio = 1.35, reorient = false } = opts; // Added reorient flag
 
-    const box = new THREE.Box3().setFromObject(mesh);
-    const sphere = box.getBoundingSphere(new THREE.Sphere());
+  const box = new THREE.Box3().setFromObject(mesh);
+  const sphere = box.getBoundingSphere(new THREE.Sphere());
 
-    const startPos = camera.position.clone();
-    const startTarget = controls ? controls.target.clone() : new THREE.Vector3();
+  const startPos = camera.position.clone();
+  const startTarget = controls ? controls.target.clone() : new THREE.Vector3();
+  const endTarget = sphere.center.clone();
 
-    const endTarget = sphere.center.clone();
-
-    // keep current viewing direction but set distance to fit sphere
-    const dir = startPos.clone().sub(startTarget).normalize();
-    const dist = sphere.radius * fitRatio / Math.sin(THREE.MathUtils.degToRad(camera.fov * 0.5));
-    const endPos = endTarget.clone().add(dir.multiplyScalar(dist));
-
-    const t0 = performance.now();
-    function animateZoom() {
-      const t = Math.min(1, (performance.now() - t0) / duration);
-      // ease in-out
-      const e = t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t;
-
-      camera.position.lerpVectors(startPos, endPos, e);
-      if (controls) {
-        controls.target.lerpVectors(startTarget, endTarget, e);
-        controls.update();
-      }
-      camera.lookAt(controls ? controls.target : endTarget);
-      if (t < 1) requestAnimationFrame(animateZoom);
+  // --- NEW LOGIC: CALCULATE "FRONT" FACING ANGLE ---
+  let dir;
+  if (reorient) {
+    // Calculate direction from World Origin (0,0,0) -> Muscle Center
+    // This creates a vector pointing "outward" from the body through the muscle
+    const worldOrigin = new THREE.Vector3(0, 0, 0);
+    dir = new THREE.Vector3().subVectors(sphere.center, worldOrigin).normalize();
+    
+    // Edge case safety: if muscle is exactly at center, default to current camera angle
+    if (dir.lengthSq() === 0) {
+      dir = startPos.clone().sub(startTarget).normalize();
     }
-    animateZoom();
+  } else {
+    // OLD LOGIC: Keep the current camera angle (don't rotate around)
+    dir = startPos.clone().sub(startTarget).normalize();
   }
+
+  // Determine distance needed to fit the object
+  // (Math: fits the sphere radius within the camera's field of view)
+  const dist = sphere.radius * fitRatio / Math.sin(THREE.MathUtils.degToRad(camera.fov * 0.5));
+  
+  // Calculate final camera position along that direction vector
+  const endPos = endTarget.clone().add(dir.multiplyScalar(dist));
+
+  const t0 = performance.now();
+  function animateZoom() {
+    const t = Math.min(1, (performance.now() - t0) / duration);
+    // ease in-out formula
+    const e = t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t;
+
+    camera.position.lerpVectors(startPos, endPos, e);
+    if (controls) {
+      controls.target.lerpVectors(startTarget, endTarget, e);
+      controls.update();
+    }
+    // Ensure camera looks at the target throughout the animation
+    camera.lookAt(controls ? controls.target : endTarget);
+    
+    if (t < 1) requestAnimationFrame(animateZoom);
+  }
+  animateZoom();
+}
   function autoZoomToKey(key, opts) {
     const m = getMeshForKey(key);
     if (m) zoomToMesh(m, opts);
   }
 
-  // ---- Hover highlight + tooltip (does NOT override a selected mesh) ----
-  let currentHover = null;
-  container.addEventListener('pointermove', e => {
+// ---- Hover highlight + tooltip (Smarter "Drill-Through" Version) ----
+let currentHover = null;
+container.addEventListener('pointermove', e => {
 
-    if (e.buttons === 1) { 
-      isDragging = true;
+  if (e.buttons === 1) { 
+    isDragging = true;
+  }
+  
+  if (isDragging) {
+    hideTip();
+    if (currentHover && currentHover !== selectedMesh && currentHover.material?.emissive) {
+      currentHover.material.emissive.setHex(0x000000);
     }
+    currentHover = null;
+    return; 
+  }
+
+  if (!model) return;
+  
+  const rect = container.getBoundingClientRect();
+  pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+  pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+  raycaster.setFromCamera(pointer, camera);
+  
+  // Get ALL things the ray passes through
+  const hits = raycaster.intersectObject(model, true);
+
+  // NEW LOGIC: Find the first hit that actually has a dictionary entry
+  let validHit = null;
+  let validKey = null;
+
+  for (const hit of hits) {
+    const mesh = hit.object;
+    const meshName = (mesh.name || '').toLowerCase();
+    // Try to find a matching key for this specific hit
+    const foundKey = Object.keys(MUSCLE_INFO).find(k => meshName.includes(k));
     
-    // This disables hover effects *while* dragging
-    if (isDragging) {
-      hideTip();
+    if (foundKey) {
+      validHit = mesh;
+      validKey = foundKey;
+      break; // Stop looking, we found the closest VALID muscle
+    }
+  }
+
+  if (validHit) {
+    const mesh = validHit;
+
+    if (currentHover !== mesh) {
+      // Clear previous hover if it wasn't the selected one
       if (currentHover && currentHover !== selectedMesh && currentHover.material?.emissive) {
         currentHover.material.emissive.setHex(0x000000);
       }
-      currentHover = null;
-      return; // Don't raycast for hover
+      // Highlight new hover (unless it's already selected)
+      if (mesh !== selectedMesh && mesh.material?.emissive) {
+        mesh.material.emissive.setHex(HOVER_COLOR);
+      }
+      currentHover = mesh;
     }
 
-    if (!model) return;
-    
-    const rect = container.getBoundingClientRect();
-    pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
-    raycaster.setFromCamera(pointer, camera);
-    const hits = raycaster.intersectObject(model, true);
+    // Show tooltip using the valid key we found
+    showTip(MUSCLE_INFO[validKey].title, e.clientX + 12, e.clientY + 12);
 
-    if (hits.length) {
-      const mesh = hits[0].object;
-
-      if (currentHover !== mesh) {
-        // unhover previous if it isn't the selected one
-        if (currentHover && currentHover !== selectedMesh && currentHover.material?.emissive) {
-          currentHover.material.emissive.setHex(0x000000);
-        }
-        // light hover only if not currently selected
-        if (mesh !== selectedMesh && mesh.material?.emissive) {
-          mesh.material.emissive.setHex(HOVER_COLOR);
-        }
-        currentHover = mesh;
-      }
-
-      // tooltip text from MUSCLE_INFO key
-      const meshName = (mesh.name || '').toLowerCase();
-      const key = Object.keys(MUSCLE_INFO).find(k => meshName.includes(k));
-      if (key) showTip(MUSCLE_INFO[key].title, e.clientX + 12, e.clientY + 12);
-      else hideTip();
-
-    } else {
-      if (currentHover && currentHover !== selectedMesh && currentHover.material?.emissive) {
-        currentHover.material.emissive.setHex(0x000000);
-      }
-      currentHover = null;
-      hideTip();
+  } else {
+    // We hit nothing, OR we only hit unlabelled junk
+    if (currentHover && currentHover !== selectedMesh && currentHover.material?.emissive) {
+      currentHover.material.emissive.setHex(0x000000);
     }
-  });
+    currentHover = null;
+    hideTip();
+  }
+});
   // Hide tooltip when pointer leaves the viewer
   container.addEventListener('pointerleave', hideTip);
 
@@ -526,8 +597,15 @@ scene.traverse(o => {
   
   // 2. New pointerup listener: This now handles all click/select logic.
   container.addEventListener('pointerup', e => {
+    // ---------------------------------------------------------
+    // NEW: Ignore clicks if they landed on a Button or the Control Panels
+    // ---------------------------------------------------------
+    if (e.target.closest('button') || 
+        e.target.closest('.controls') || 
+        e.target.closest('.viewer-hud-right')) {
+      return; 
+    }
     // If we dragged, 'isDragging' will be true. Do nothing.
-    // OrbitControls handled the rotation, and the selection is preserved.
     if (isDragging) return;
   
     // If we're here, it was a 'click' (no move).
@@ -566,20 +644,48 @@ scene.traverse(o => {
     }
   });
 
-  // ---- Zoom Button Logic ----
-  const zoomInBtn = document.getElementById('zoom-in-btn');
-  const zoomOutBtn = document.getElementById('zoom-out-btn');
-  
-  zoomInBtn?.addEventListener('click', () => {
-    controls.dollyOut(1.2); 
-    controls.update();
-  });
-  
-  zoomOutBtn?.addEventListener('click', () => {
-    controls.dollyIn(1.2);
-    controls.update();
-  });
+// ---- Zoom Button Logic ----
+const zoomInBtn = document.getElementById('zoom-in-btn');
+const zoomOutBtn = document.getElementById('zoom-out-btn');
 
+zoomInBtn?.addEventListener('click', () => {
+  // dollyIn moves the camera closer (decreases radius)
+  controls.dollyIn(1.2); 
+  controls.update();
+});
+
+zoomOutBtn?.addEventListener('click', () => {
+  // dollyOut moves the camera further away (increases radius)
+  controls.dollyOut(1.2);
+  controls.update();
+});
+
+  // ---- Center / Reset Button Logic ----
+  const centerBtn = document.getElementById('center-btn');
+  
+  centerBtn?.addEventListener('click', () => {
+    // 1. Reset Camera to the initial load position defined at the top of your script
+    camera.position.set(0.6, 0.6, 2.3);
+    
+    // 2. Reset the target the camera is looking at.
+    // (Users may have panned away, so we must force it back to world origin 0,0,0)
+    controls.target.set(0, 0, 0);
+    
+    // 3. Update controls to apply the changes immediately
+    controls.update();
+  });
+  // ---- Sync UI Selection to 3D Model ----
+  // This listens for when a user clicks the Index or Search
+  window.addEventListener('mm:selected', (e) => {
+    const key = e.detail?.name;
+    if (!key) return;
+
+    // 1. Find and Highlight the mesh
+    selectMeshByKey(key);
+
+    // 2. Zoom camera to the mesh
+    autoZoomToKey(key, { duration: 900, fitRatio: 1.35 });
+  });
 
   // ---- Handle resize for renderer/camera ----
   window.addEventListener('resize', () => {
