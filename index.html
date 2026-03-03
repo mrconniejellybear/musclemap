@@ -30,25 +30,22 @@
 
 
 <body>
+  
 <header class="mm-topbar" role="banner" aria-label="Site">
   
 
   <div class="topbar-inner">
     <a class="brand2" href="/">
-      <img id="logo" src="LIGHT-LOGO.png"">
+      <img id="logo" src="LIGHT-LOGO2.png">
       </a>
     <a class="brand" href="https://www.wwu.edu/">
       <img id="logo" src="WWU_Scaled_Lvl2_Rgb.png">
        </a>
     <nav class="toplinks" aria-label="Primary">
-
-      <a class="link" href="/">
-        Viewer
-        </a>
   
        <a class="link" 
         href="references.html">
-        References
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M648.46-180h35.38v-140h-35.38v140Zm17.69-176.54q7.23.39 12.46-5.04 5.23-5.42 5.23-12.65t-5.42-12.46q-5.42-5.23-12.27-5.23-7.23 0-12.46 5.23t-5.23 12.46q0 6.85 5.23 12.27t12.46 5.42ZM200-800v247.31-1.16V-160v-640 180-180Zm90 390h138.92q8.7-16.85 19.54-31.85 10.85-15 23.85-28.15H290v60Zm0 160h110.69q-2.23-15-2.23-29.81 0-14.8 1.85-30.19H290v60Zm-77.69 150Q182-100 161-121q-21-21-21-51.31v-615.38Q140-818 161-839q21-21 51.31-21H530l210 210v107q-14.77-4.46-29.58-6.88-14.81-2.43-30.42-2.81V-620H500v-180H212.31q-4.62 0-8.46 3.85-3.85 3.84-3.85 8.46v615.38q0 4.62 3.85 8.46 3.84 3.85 8.46 3.85h218.15q8.69 17.23 19.54 32.23 10.85 15 24.23 27.77H212.31Zm581.3-313.61q52.54 52.53 52.54 127.46 0 74.92-52.54 127.46-52.53 52.53-127.46 52.53-74.92 0-127.46-52.53-52.54-52.54-52.54-127.46 0-74.93 52.54-127.46 52.54-52.54 127.46-52.54 74.93 0 127.46 52.54Z"/></svg>
         </a>
   
         <a class="link" href="mailto:connordavidmausolf4@gmail.com">
@@ -56,7 +53,7 @@
        </a>
 
        <button class="link" id="themeToggle" aria-label="Toggle Dark/Light Theme">
-        <svg xmlns="http://www.w3.org/2000/svg" height="23px" viewBox="0 -960 960 960" width="23px" fill="currentColor"><path d="M480-55.69 354.38-180H180v-174.38L55.69-480 180-605.62V-780h174.38L480-904.31 605.62-780H780v174.38L904.31-480 780-354.38V-180H605.62L480-55.69Zm0-239.7q76.46 0 130.54-54 54.07-54 54.07-130.61 0-76.61-54-130.61-54-54-130.61-54v369.22ZM480-140l100-100h140v-140l100-100-100-100v-140H580L480-820 380-720H240v140L140-480l100 100v140h140l100 100Zm0-340Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M140-254.62v-59.99h680v59.99H140ZM140-450v-60h680v60H140Zm0-195.39v-59.99h680v59.99H140Z"/></svg>
       </button>
 
       </nav>
@@ -64,12 +61,40 @@
  
 </header>
 
-
 <main class="mm-content">
   <div class="layout-wrapper">
+    <div class="searchy">
+      <svg class="mm-search-icon" xmlns="http://www.w3.org/2000/svg" height="17px" viewBox="0 -960 960 960" width="17px" fill="currentColor"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
+      <input id="mi-search" class="mi-search" placeholder="Search here..." aria-label="Search muscle...">
+    </div>
+    
+    <aside id="muscle-index" class="muscle-index">
+      <ul id="mi-list" class="mi-list" role="listbox" aria-label="All muscles"></ul>
+    </aside>
     <div class="viewer-container">
       <div class="viewer-frame">
         <div id="three-container" class="viewer-box">
+
+          <div class="instruction-overlay" id="instructionOverlay">
+            <div class="instruction-content">
+              <h3>How to use the viewer</h3>
+              <p>Click and drag to rotate the model. Scroll to zoom in and out.</p>
+              <p>Isolate a muscle using the puzzle piece  
+                (<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M355.08-140H200q-24.92 0-42.46-17.54T140-200v-155.08q41.08-5 70.54-34.15Q240-418.39 240-460t-29.46-70.77q-29.46-29.15-70.54-34.15V-720q0-24.92 17.54-42.46T200-780h160q5.39-38.15 33.42-62.92 28.04-24.77 66.58-24.77t66.58 24.77Q554.61-818.15 560-780h160q24.92 0 42.46 17.54T780-720v160q38.15 5.39 62.92 33.42 24.77 28.04 24.77 66.58t-24.77 66.58Q818.15-365.39 780-360v160q0 24.92-17.54 42.46T720-140H564.92q-5.38-43.08-35.15-71.54Q500-240 460-240t-69.77 28.46q-29.77 28.46-35.15 71.54ZM200-200h108.46q20.54-52.92 64.89-76.46Q417.69-300 460-300t86.65 23.54Q591-252.92 611.54-200H720v-217.69h49.23q18.38-2.31 28.42-14.85 10.04-12.54 10.04-27.46 0-14.92-10.04-27.46-10.04-12.54-28.42-14.85H720V-720H502.31v-49.23q-2.31-18.38-14.85-28.42-12.54-10.04-27.46-10.04-14.92 0-27.46 10.04-12.54 10.04-14.85 28.42V-720H200v109.54q45.54 18.85 72.77 59.88Q300-509.54 300-460q0 48.92-27.23 89.96Q245.54-329 200-309.54V-200Zm260-260Z"/></svg>)
+              icon.</p>
+
+              <p>Click the center icon 
+                (<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M212.31-140Q182-140 161-161q-21-21-21-51.31V-360h60v147.69q0 4.62 3.85 8.46 3.84 3.85 8.46 3.85H360v60H212.31ZM600-140v-60h147.69q4.62 0 8.46-3.85 3.85-3.84 3.85-8.46V-360h60v147.69Q820-182 799-161q-21 21-51.31 21H600ZM140-600v-147.69Q140-778 161-799q21-21 51.31-21H360v60H212.31q-4.62 0-8.46 3.85-3.85 3.84-3.85 8.46V-600h-60Zm620 0v-147.69q0-4.62-3.85-8.46-3.84-3.85-8.46-3.85H600v-60h147.69Q778-820 799-799q21 21 21 51.31V-600h-60ZM480-300q-74.92 0-127.46-52.54Q300-405.08 300-480q0-74.92 52.54-127.46Q405.08-660 480-660q74.92 0 127.46 52.54Q660-554.92 660-480q0 74.92-52.54 127.46Q554.92-300 480-300Zm0-60q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0-120Z"/></svg>)
+                to re-center the model. </p>
+
+              <p>The contrast icon 
+                ( <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M640-220q-31.62 0-60.96-7.69-29.35-7.7-55.27-22.08 49.54-44 76.73-103.92 27.19-59.93 27.19-126.31T600.5-606.31q-27.19-59.92-76.73-103.92 25.92-14.38 55.27-22.08Q608.38-740 640-740q108.54 0 184.27 75.73T900-480q0 108.54-75.73 184.27T640-220Zm-320 0q-108.54 0-184.27-75.73T60-480q0-108.54 75.73-184.27T320-740q31.62 0 60.96 7.69 29.35 7.7 55.27 22.08-12.38 10.54-23.34 22.81-10.96 12.27-20.89 25.27-15.77-8.54-33.96-13.2Q339.85-680 320-680q-83 0-141.5 58.5T120-480q0 83 58.5 141.5T320-280q19.85 0 38.04-4.65 18.19-4.66 33.96-13.2 9.93 13 20.89 25.27t23.34 22.81q-25.92 14.38-55.27 22.08Q351.62-220 320-220Zm160-56.16q-47.38-36.3-73.69-90Q380-419.85 380-480q0-60.15 26.31-113.84 26.31-53.7 73.69-90 47.38 36.3 73.69 90Q580-540.15 580-480q0 60.15-26.31 113.84-26.31 53.7-73.69 90Z"/></svg>)
+
+                swaps between a high-contrast and striated model.
+              </p>
+              <button class="close-overlay" id="closeOverlayBtn">Got it</button>
+            </div>
+          </div>
           
           <div id="texture-loader" class="loader-overlay hidden">
             <div class="spinner"></div>
@@ -79,8 +104,6 @@
             <button id="zoom-in-btn" class="zoom-btn" aria-label="Zoom In"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M450-290h60v-160h160v-60H510v-160h-60v160H290v60h160v160Zm30.07 190q-78.84 0-148.21-29.92t-120.68-81.21q-51.31-51.29-81.25-120.63Q100-401.1 100-479.93q0-78.84 29.92-148.21t81.21-120.68q51.29-51.31 120.63-81.25Q401.1-860 479.93-860q78.84 0 148.21 29.92t120.68 81.21q51.31 51.29 81.25 120.63Q860-558.9 860-480.07q0 78.84-29.92 148.21t-81.21 120.68q-51.29 51.31-120.63 81.25Q558.9-100 480.07-100Zm-.07-60q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg></button>
 
             <button id="zoom-out-btn" class="zoom-btn" aria-label="Zoom Out"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M290-450h380v-60H290v60Zm190.07 350q-78.84 0-148.21-29.92t-120.68-81.21q-51.31-51.29-81.25-120.63Q100-401.1 100-479.93q0-78.84 29.92-148.21t81.21-120.68q51.29-51.31 120.63-81.25Q401.1-860 479.93-860q78.84 0 148.21 29.92t120.68 81.21q51.31 51.29 81.25 120.63Q860-558.9 860-480.07q0 78.84-29.92 148.21t-81.21 120.68q-51.29 51.31-120.63 81.25Q558.9-100 480.07-100Zm-.07-60q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg></button>
-
-            <button id="fullscreen-btn" class="zoom-btn" aria-label="Fullscreen"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M140-140v-188.46h60V-200h128.46v60H140Zm491.92 0v-60h128.46v-128.46h60V-140H631.92ZM140-631.54V-820h188.46v60H200v128.46h-60Zm620.38 0V-760H631.92v-60h188.46v188.46h-60Z"/></svg></button>
           </div>
 
           <div class="viewer-hud-left">
@@ -108,34 +131,38 @@
               </div>
             </div> 
           </div>
+
         </div>
       </div>
-    </div>
 
-    <div class= "mm-sep6" role="separator"></div>  
+    <div class="under">
+      <button class="help-btn"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M508.5-267.21q11.81-11.83 11.81-28.97 0-17.13-11.83-28.94-11.83-11.8-28.96-11.8-17.13 0-28.94 11.83-11.81 11.83-11.81 28.96 0 17.13 11.83 28.94 11.83 11.8 28.96 11.8 17.13 0 28.94-11.82Zm-57.27-131.41h56.31q.77-29.53 8.65-47.19 7.89-17.65 38.27-46.8 26.39-26.39 40.42-48.74 14.04-22.34 14.04-52.77 0-51.65-37.11-80.69-37.12-29.03-87.81-29.03-50.08 0-82.88 26.73-32.81 26.73-46.81 62.96l51.38 20.61q7.31-19.92 25-38.81 17.69-18.88 52.54-18.88 35.46 0 52.42 19.42 16.97 19.43 16.97 42.73 0 20.39-11.62 37.31-11.61 16.92-29.61 32.69-39.39 35.54-49.77 56.7-10.39 21.15-10.39 63.76ZM480.07-100q-78.84 0-148.21-29.92t-120.68-81.21q-51.31-51.29-81.25-120.63Q100-401.1 100-479.93q0-78.84 29.92-148.21t81.21-120.68q51.29-51.31 120.63-81.25Q401.1-860 479.93-860q78.84 0 148.21 29.92t120.68 81.21q51.31 51.29 81.25 120.63Q860-558.9 860-480.07q0 78.84-29.92 148.21t-81.21 120.68q-51.29 51.31-120.63 81.25Q558.9-100 480.07-100Zm-.07-60q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg></button>
+
+      <div class="rotation-controls">
+        
+        <input type="range" id="rotation-slider" min="0" max="360" value="0" aria-label="Rotate Model">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M252.31-100q-29.92 0-51.12-21.19Q180-142.39 180-172.31v-375.38q0-29.92 21.19-51.12Q222.39-620 252.31-620H300v-80q0-74.92 52.54-127.46Q405.08-880 480-880q74.92 0 127.46 52.54Q660-774.92 660-700v80h47.69q29.92 0 51.12 21.19Q780-577.61 780-547.69v375.38q0 29.92-21.19 51.12Q737.61-100 707.69-100H252.31Zm0-60h455.38q5.39 0 8.85-3.46t3.46-8.85v-375.38q0-5.39-3.46-8.85t-8.85-3.46H252.31q-5.39 0-8.85 3.46t-3.46 8.85v375.38q0 5.39 3.46 8.85t8.85 3.46Zm277.27-150.42Q550-330.85 550-360t-20.42-49.58Q509.15-430 480-430t-49.58 20.42Q410-389.15 410-360t20.42 49.58Q450.85-290 480-290t49.58-20.42ZM360-620h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80ZM240-160v-400 400Z"/></svg>
+      </div>
+
+
+      <button class="help-btn"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M427.73-117.92q-21.96-21-23.88-51.31h152.3q-1.92 30.31-23.88 51.31-21.96 21-52.27 21-30.31 0-52.27-21ZM480-800q-44.38 0-83.23 16.27t-67.85 44.04l-43.38-42.15q40.23-37.24 89.08-57.7Q423.46-860 480-860q116.92 0 198.46 81.54T760-580q0 65.61-23.27 112.85-23.27 47.23-55.65 80.38l-42.16-42.15q22.16-23 41.62-60.35Q700-526.62 700-580q0-92-64-156t-156-64Zm347.23 672.61-42.77 42.77L529.08-340H336.15q-62.84-39.08-99.49-102.12Q200-505.15 200-580q0-20.38 3.08-41.12 3.08-20.73 8.46-36.42L81.39-788.92l42.15-42.16 703.69 703.69ZM354-400h115.08l-206-206q-1.16 5.46-2.12 12.42-.96 6.96-.96 13.58 0 54 24.5 101t69.5 79Zm6.69-108.39Zm118.23-80.92Zm154.77 304.69v60H330v-60h303.69Z"/></svg></button>
+
+      <button class="help-btn"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M798.15-73.7 690.62-180H172.31Q142-180 121-201q-21-21-21-51.31v-455.38Q100-738 121-759q21-21 51.31-21h3.85l59.99 60h-63.84q-4.62 0-8.46 3.85-3.85 3.84-3.85 8.46v455.38q0 5.39 3.46 8.85t8.85 3.46h458.31l-91.54-91.54H251.54v-60h227.54L60.62-811.23l42.15-42.15L840.3-115.85 798.15-73.7Zm52.62-145.69L800-270.15v-437.54q0-5.39-3.46-8.85t-8.85-3.46H350.15l-59.99-60h497.53Q818-780 839-759q21 21 21 51.31v452.92q0 9.85-1.81 18.69-1.81 8.85-7.42 16.69ZM587.08-483.08l-60-60h181.38v60H587.08Zm-335.54 0v-60h60v60h-60Zm323.54-12Zm-174 25.54Z"/></svg></button>
+    </div>
+    <div class="under2"><p>This model is made possible by Alex Lashko and Three.js Orbit Controls <a href="poop.com">Learn More</a> </p></div>
+    </div>
 
     <div class="panel-group">
   
       <aside id="mm-panel" class="mm-panel" aria-label="Muscle Info">
-        <div class="searchy">
-          <svg class="mm-search-icon" xmlns="http://www.w3.org/2000/svg" height="17px" viewBox="0 -960 960 960" width="17px" fill="currentColor"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
-          <input id="mi-search" class="mi-search" placeholder="Search muscles…" aria-label="Search muscle...">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M480-357.85 253.85-584 296-626.15l184 184 184-184L706.15-584 480-357.85Z"/></svg>
-        </div>
-    
-          <div class="mm-sep2" role="separator"></div>
-
+        <h2 class="muscleName" id="muscleName"> Muscle Name</h2>
         <div class="panel-content">
           <div class="info-grid">
             <img id="muscleImage" src="" alt="Selected muscle">
             <div class="info-text">
 
               <div class="top-text">
-              <h2 class="muscleName" id="muscleName"> Muscle Name</h2>
-              <div class="section-label">
-                <h3 class="Anatomy"><svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#6c6c6c"><path d="M180-215.39V-280h360v60l-360 4.61Zm0-155.76v-60h600v60H180Zm0-157.7v-60h600v60H180ZM180-680v-64.61h600V-680H180Z"/></svg>
-                  Anatomy</h3>  
-              </div>
+        
               </div>
 
               <div class="mm-panel-section section-about">
@@ -144,12 +171,10 @@
               <div class="mm-panel-section section-desc">
                 <p id="info-desc"></p>
               </div>
-              <div class="mm-sep2" role="separator"></div>
               <div class="mm-panel-section section-heads">
                 <h3>Heads</h3>
                 <p id="info-head"></p>
               </div>
-              <div class="mm-sep2" role="separator"></div>
             </div>
           </div>
           
@@ -161,9 +186,6 @@
           </div>
 
           <div class="mm-panel-section">
-            <div class="section-label">
-              <h3><svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#6c6c6c"><path d="M180-215.39V-280h360v60l-360 4.61Zm0-155.76v-60h600v60H180Zm0-157.7v-60h600v60H180ZM180-680v-64.61h600V-680H180Z"/></svg>Exercise</h3>
-            </div>
             <h3>How Can I Train the Muscle?</h3>
             <ul id="exerciseList"></ul>
           </div>
@@ -177,53 +199,18 @@
         <div class="link-explain"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -900 960 960" width="20px" fill="currentColor"><path d="M140-170v-60h460v60H140Zm500.06-280q-78.83 0-134.44-55.56Q450-561.12 450-639.94q0-78.83 55.56-134.44Q561.12-830 639.94-830q78.83 0 134.44 55.56Q830-718.88 830-640.06q0 78.83-55.56 134.44Q718.88-450 640.06-450ZM140-490v-60h233.54q5.46 16.62 12.34 31.42 6.89 14.81 16.43 28.58H140Zm0 160v-60h373.31q19.54 10.54 41.31 17.92 21.77 7.39 45.38 10.62V-330H140Zm482.31-192.31h35.38v-151.54h-35.38v151.54ZM640-716.15q8 0 14-6t6-14q0-8-6-14t-14-6q-8 0-14 6t-6 14q0 8 6 14t14 6Z"/></svg>Descriptions with<a href="references.html">blue text denote a hyperlink</a> to a supporting source</div>
       </aside>
   
-      <aside id="muscle-index" class="muscle-index">
-
-   
-        <div class="index-label"><p>
-          <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor"><path d="M141.85-442.69q-1-9.23-1.5-18.66-.5-9.42-.5-18.65 0-70.77 26.65-132.61 26.66-61.85 72.96-107.85 46.31-46 108.04-72.77Q409.23-820 480-820q71.15 0 133.19 26.77 62.04 26.77 108.04 72.77 46 46 72.96 107.85 26.96 61.84 26.96 132.61 0 9.23-.5 18.65-.5 9.43-1.5 18.66h-60.61q1.61-9.23 2.11-18.66.5-9.42.5-18.65 0-11.92-.88-23.85-.89-11.92-3.27-23.46H624.77q1.38 11.54 1.58 23.46.19 11.93.19 23.85v18.65q0 9.43-1 18.66h-59V-473q0-14.31-.5-27.85-.5-13.54-1.89-26.46H396.46q-1.38 12.92-1.88 26.46-.5 13.54-.5 27.85V-442.69h-59q-1-9.23-1-18.66V-480q0-11.92.19-23.85.19-11.92 1.58-23.46H204q-2.38 11.54-3.27 23.46-.88 11.93-.88 23.85 0 9.23.5 18.65.5 9.43 2.11 18.66h-60.61Zm80-144.62h120.69q9.15-53.77 25.19-92.88 16.04-39.12 38.12-67.12Q344-733.15 295-690.69q-49 42.46-73.15 103.38Zm182.92 0h150.46q-9.23-46.46-26.92-89.96-17.69-43.5-48.31-78.88-30.62 35.77-48.42 79.07-17.81 43.31-26.81 89.77Zm213.31 0h121.07Q715-648.62 664.92-690.89q-50.08-42.26-112.31-56.42 22.85 29.62 39.58 68.69 16.73 39.08 25.89 91.31ZM450-140v-30q0-52.31-36.73-88.65Q376.54-295 324.23-295H100v-60h224.23q48.39 0 89.31 22.73T480-269.61q25.54-39.93 66.46-62.66Q587.38-355 635.38-355H860v60H635.38q-52.3 0-88.84 36.35Q510-222.31 510-170v30h-60Z"/></svg>Index</p>
-        </div>
-        <ul id="mi-list" class="mi-list" role="listbox" aria-label="All muscles"></ul>
-      </aside>
     </div>
   </div>
 </main>
 
-<section class="instructions">
-  <div class="instructions-wrapper"> 
+    <section class="soapbox"> 
+      <p>I am a research assistant at WWU earning my masters in experimental psychology. Over the past year, I have been building this site as an accessible, user-friendly resource for high-quality information about the body. I have designed this website with my dear friend Zoe Rust.</p>
     
-      <div class="instructions-item">
-        <dt><svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor"><path d="M479.56-255.39q17.13 0 28.94-11.82 11.81-11.83 11.81-28.97 0-17.13-11.83-28.94-11.83-11.8-28.96-11.8-17.13 0-28.94 11.83-11.81 11.83-11.81 28.96 0 17.13 11.83 28.94 11.83 11.8 28.96 11.8Zm-28.33-143.23h56.31q.77-29.53 8.65-47.19 7.89-17.65 38.27-46.8 26.39-26.39 40.42-48.74 14.04-22.34 14.04-52.77 0-51.65-37.11-80.69-37.12-29.03-87.81-29.03-50.08 0-82.88 26.73-32.81 26.73-46.81 62.96l51.38 20.61q7.31-19.92 25-38.81 17.69-18.88 52.54-18.88 35.46 0 52.42 19.42 16.97 19.43 16.97 42.73 0 20.39-11.62 37.31-11.61 16.92-29.61 32.69-39.39 35.54-49.77 56.7-10.39 21.15-10.39 63.76ZM480.07-100q-78.84 0-148.21-29.92t-120.68-81.21q-51.31-51.29-81.25-120.63Q100-401.1 100-479.93q0-78.84 29.92-148.21t81.21-120.68q51.29-51.31 120.63-81.25Q401.1-860 479.93-860q78.84 0 148.21 29.92t120.68 81.21q51.31 51.29 81.25 120.63Q860-558.9 860-480.07q0 78.84-29.92 148.21t-81.21 120.68q-51.29 51.31-120.63 81.25Q558.9-100 480.07-100Zm-.07-60q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>Using the Viewer</dt>
-        <dd>
-          <svg xmlns="http://www.w3.org/2000/svg" height="21px" viewBox="0 -960 960 960" width="21px" fill="currentColor"><path d="M250-405h300v-60H250v60Zm0-120h460v-60H250v60Zm0-120h460v-60H250v60Zm230 545-99.31-150H172.31q-29.83 0-51.07-21.24Q100-292.48 100-322.31v-465.38q0-29.83 21.24-51.07Q142.48-860 172.31-860h615.38q29.83 0 51.07 21.24Q860-817.52 860-787.69v465.38q0 29.83-21.24 51.07Q817.52-250 787.69-250H579.31L480-100Zm0-108.23L547.08-310h240.61q5.39 0 8.85-3.46t3.46-8.85v-465.38q0-5.39-3.46-8.85t-8.85-3.46H172.31q-5.39 0-8.85 3.46t-3.46 8.85v465.38q0 5.39 3.46 8.85t8.85 3.46h240.61L480-208.23ZM480-555Z"/></svg>Hover over the model to preview muscle names. Double-click to select, single-click to deselect (hand icon).
-        </dd>
-        <dd>
-          <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor"><path d="m350.77-185.39-42.15-42.15 77.69-78.92q-122.23-16.23-204.27-64.04T100-480q0-73.77 110.12-126.88Q320.23-660 480-660q159.77 0 269.88 53.12Q860-553.77 860-480q0 52.77-60.54 96.77-60.54 44-159.46 66.46V-378q77-20 118.5-49.5T800-480q0-33.15-85.5-76.58Q629-600 480-600t-234.5 43.42Q160-513.15 160-480q0 26.31 58.69 60.77 58.7 34.46 156.54 50.31l-66.61-66.62 42.15-42.15 146.15 146.15-146.15 146.15Z"/></svg>Using the cursor, click and drag to rotate the model 360°. Alternatively, use the orbit controls at the bottom of the viewer.
-        </dd>
-        <dd>
-          <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor"><path d="m68.15-462.31-33.53-33.54L158.16-620H52.31v-47.69H240V-480h-47.69v-105.85L68.15-462.31ZM292.31-720v-187.69H340v106.46l123.54-124.15 34.15 34.15-124.15 123.54H480V-720H292.31Zm285.3 655.38q-22.07 0-41.96-8.23-19.88-8.23-35.73-24.07L299.38-297.69 324-322.54q12.54-12.15 29.04-16.11 16.5-3.97 32.88.5l88.69 23.23v-329.7q0-12.75 8.63-21.37 8.63-8.62 21.39-8.62 12.75 0 21.37 8.62 8.61 8.62 8.61 21.37v409.54l-121.23-33.15 129.31 128.92q6.54 6.54 15.8 10.62 9.25 4.07 19.12 4.07h157q37.62 0 63.81-26.19 26.19-26.19 26.19-63.81v-160q0-12.75 8.63-21.37 8.63-8.63 21.39-8.63 12.75 0 21.37 8.63 8.61 8.62 8.61 21.37v160q0 62.16-43.92 106.08t-106 43.92H577.61Zm13.54-270v-160q0-12.77 8.63-21.38 8.63-8.62 21.39-8.62 12.75 0 21.37 8.63 8.61 8.62 8.61 21.37v160h-60Zm116.93 0v-120q0-12.77 8.62-21.38 8.63-8.62 21.39-8.62 12.75 0 21.37 8.63 8.61 8.62 8.61 21.37v120h-59.99ZM675-241.92Z"/></svg>Zoom using your trackpad, scroll wheel, or the native zoom controls.
-        </dd>
-        <dd>
-          <svg xmlns="http://www.w3.org/2000/svg" height="21px" viewBox="0 -960 960 960" width="21px" fill="currentColor"><path d="M355.08-140H200q-24.92 0-42.46-17.54T140-200v-155.08q41.08-5 70.54-34.15Q240-418.39 240-460t-29.46-70.77q-29.46-29.15-70.54-34.15V-720q0-24.92 17.54-42.46T200-780h160q5.39-38.15 33.42-62.92 28.04-24.77 66.58-24.77t66.58 24.77Q554.61-818.15 560-780h160q24.92 0 42.46 17.54T780-720v160q38.15 5.39 62.92 33.42 24.77 28.04 24.77 66.58t-24.77 66.58Q818.15-365.39 780-360v160q0 24.92-17.54 42.46T720-140H564.92q-5.38-43.08-35.15-71.54Q500-240 460-240t-69.77 28.46q-29.77 28.46-35.15 71.54ZM200-200h108.46q20.54-52.92 64.89-76.46Q417.69-300 460-300t86.65 23.54Q591-252.92 611.54-200H720v-217.69h49.23q18.38-2.31 28.42-14.85 10.04-12.54 10.04-27.46 0-14.92-10.04-27.46-10.04-12.54-28.42-14.85H720V-720H502.31v-49.23q-2.31-18.38-14.85-28.42-12.54-10.04-27.46-10.04-14.92 0-27.46 10.04-12.54 10.04-14.85 28.42V-720H200v109.54q45.54 18.85 72.77 59.88Q300-509.54 300-460q0 48.92-27.23 89.96Q245.54-329 200-309.54V-200Zm260-260Z"/></svg>While a muscle is selected, click the puzzle piece icon to isolate it from the rest of the model.
-        </dd>
-        <dd>Click the contrast icon to swap between a high-contrast and striated model.
-        </dd>
-        <dd>
-          <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor"><path d="M480-340q-57.75 0-98.87-41.13Q340-422.25 340-480q0-57.75 41.13-98.87Q422.25-620 480-620q57.75 0 98.87 41.13Q620-537.75 620-480q0 57.75-41.13 98.87Q537.75-340 480-340Zm0-60q33 0 56.5-23.5T560-480q0-33-23.5-56.5T480-560q-33 0-56.5 23.5T400-480q0 33 23.5 56.5T480-400Zm0-80ZM212.44-140Q182-140 161-161q-21-21-21-51.44V-360h60v147.69q0 4.62 3.85 8.46 3.84 3.85 8.46 3.85H360v60H212.44ZM600-140v-60h147.69q4.62 0 8.46-3.85 3.85-3.84 3.85-8.46V-360h60v147.56Q820-182 799-161q-21 21-51.44 21H600ZM140-600v-147.56Q140-778 161-799q21-21 51.44-21H360v60H212.31q-4.62 0-8.46 3.85-3.85 3.84-3.85 8.46V-600h-60Zm620 0v-147.69q0-4.62-3.85-8.46-3.84-3.85-8.46-3.85H600v-60h147.56Q778-820 799-799q21 21 21 51.44V-600h-60Z"/></svg>To re-center the model, click the target icon.
-        </dd>
-      </div>
-
-  
-    <div class="soapbox"> 
-      <dd>I am a research assistant at WWU earning my masters in experimental psychology. Over the past year, I have been building this site as an accessible, user-friendly resource for high-quality information about the body.</dd>
+      <p>Strong skeletal muscles are important to maintain quality of life, and exercise starts with understanding of the body. This project is for anyone looking to round-out their muscle knowledge, in or out of the gym.</p>
     
-      <dd>Strong skeletal muscles are important to maintain quality of life, and exercise starts with understanding of the body. This project is for anyone looking to round-out their muscle knowledge, in or out of the gym.</dd>
-    
-     <dd>
-      Feel free to leave <a href="feedback.html">feedback</a> to help me improve the site — Thank you for using MuscleMap!</dd>
-    </div>
-
-  </div> </section>
+     <p>
+      Feel free to leave <a href="feedback.html">feedback</a> to help me improve the site — Thank you for using MuscleMap!</p>
+    </section>
 
 <footer class="credits">
   <div class="credit-box"> 
