@@ -700,4 +700,69 @@ zoomOutBtn?.addEventListener('click', () => {
     controls.update();
     renderer.render(scene, camera);
   })();
+
+  // ---- Rotation Slider Logic ----
+  const rotationSlider = document.getElementById('rotation-slider');
+  
+  // 1. Store the initial offset so "0" on the slider equals the "starting load angle"
+  // We calculate the initial azimuthal angle from the camera's starting position
+  const startPos = new THREE.Vector3(0.6, 0.6, 2.3);
+  // Calculate angle: atan2(x, z) gives the horizontal angle
+  const initialAzimuth = Math.atan2(startPos.x, startPos.z);
+
+  rotationSlider?.addEventListener('input', (e) => {
+    // Convert 0-360 slider value to Radians (0 to 2*PI)
+    const deg = parseFloat(e.target.value);
+    const radians = THREE.MathUtils.degToRad(deg);
+
+    // Get current spherical coordinates (radius, phi) so we don't mess up Zoom or Height
+    // Spherical: radius = distance, phi = vertical angle, theta = horizontal angle
+    const offset = new THREE.Vector3().subVectors(camera.position, controls.target);
+    const spherical = new THREE.Spherical().setFromVector3(offset);
+
+    // Apply rotation
+    // We add 'initialAzimuth' so the slider starts exactly where the camera loaded
+    spherical.theta = initialAzimuth + radians;
+
+    // Convert back to Cartesian and update camera
+    offset.setFromSpherical(spherical);
+    camera.position.copy(controls.target).add(offset);
+    
+    // Important: Tell OrbitControls the camera moved externally
+    camera.lookAt(controls.target);
+    controls.update();
+  });
+
+  // OPTIONAL: Update slider if user rotates manually with mouse
+  // This keeps the slider in sync if they drag the model with the cursor
+  controls.addEventListener('change', () => {
+    // Only update if we aren't currently dragging the slider (avoids jitter)
+    if (document.activeElement === rotationSlider) return;
+
+    const offset = new THREE.Vector3().subVectors(camera.position, controls.target);
+    const spherical = new THREE.Spherical().setFromVector3(offset);
+    
+    // Normalize angle to 0-360 range relative to our start
+    let angleDiff = spherical.theta - initialAzimuth;
+    // Handle wrap-around (keep it positive)
+    while (angleDiff < 0) angleDiff += Math.PI * 2;
+    while (angleDiff > Math.PI * 2) angleDiff -= Math.PI * 2;
+
+    const deg = THREE.MathUtils.radToDeg(angleDiff);
+    rotationSlider.value = deg;
+  });
+
+
+      const helpBtn = document.querySelector('.help-btn');
+    const overlay = document.getElementById('instructionOverlay');
+    const closeBtn = document.getElementById('closeOverlayBtn');
+
+    helpBtn.addEventListener('click', () => {
+      overlay.classList.add('is-visible');
+    });
+
+    closeBtn.addEventListener('click', () => {
+      overlay.classList.remove('is-visible');
+    });
+
 })();
