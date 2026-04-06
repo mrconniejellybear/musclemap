@@ -21,7 +21,7 @@
   --link-text: #2b84ff;
 
   --mm-select: #006aff;
-  --mm-highlight: #006aff19;
+  --mm-highlight: #1caafc26;
 }
 
 
@@ -695,18 +695,22 @@ color: var(--lil-text);
   text-align: left; /* This is the key change */
   display: flex;
   flex-direction: column;
-  gap: 0.8rem; /* This adds space between your paragraphs */
-  padding: 3rem;
+  gap: 1.4rem; /* This adds space between your paragraphs */
+  padding: 3vw;
 }
 .soapbox p{
  margin: auto;
  align-self: left;
  text-align: left;
- max-width: 60vw;
+ max-width: 74vw;
 }
 .soapbox a{
   text-decoration: none;
   color: var(--link-text);
+}
+.soapbox a:hover{
+  text-decoration: underline;
+  color: #0059ff;
 }
 .soapbox h1{
   margin-left: 7rem;
@@ -737,6 +741,10 @@ color: var(--lil-text);
 .credit-box a{
   text-decoration: none;
   color: #57aeff;
+}
+.credit-box a:hover{
+  text-decoration: underline;
+  color: #95ddfb;
 }
 
 
@@ -844,7 +852,7 @@ color: var(--lil-text);
 
 .atsocials{
   display: flex;
-  gap: 10rem;
+  gap: 10vw;
   padding: 1.2rem;
   justify-content: center;
   background-color: #eef2f5;
@@ -853,7 +861,7 @@ color: var(--lil-text);
 
 .atsocials a{
   display:flex; align-items:center;
-  gap: 4px;
+  gap: 6px;
  text-decoration: none;
  font-size: 13px;
   color: var(--lil-text);
@@ -862,3 +870,4 @@ color: var(--lil-text);
 .atsocials a:hover{
   color: var(--mm-select);
 }
+
