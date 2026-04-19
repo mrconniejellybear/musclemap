@@ -2,26 +2,27 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root{
-  --mm-navbar-h: 60px;
-  --main-color: #ffffff;
+  --navbar-h: 60px;
+  --main-color: #f2f5f7;
+  --color2: #f9fafc;
   
 
-  --mm-border: #d7d7e0;
+  --mm-border: #48484928;
   --radius: 8px;
 
   --max-width: auto;
 
   --mm-nav-w: 0px;
-  --mm-index-w: 230px;
+  --mm-index-w: 220px;
 
-  --main-height: 650px;
+  --main-height: 86vh;
 
   --big-text: #111111;
-  --lil-text: #282828; font-size: 13px; font-weight: 360;
+  --lil-text: #161616; font-size: 14px; font-weight: 400;
   --link-text: #2b84ff;
 
-  --mm-select: #006aff;
-  --mm-highlight: #1caafc26;
+  --mm-select: #008cff;
+  --mm-highlight: #5eb1ff24;
 }
 
 
@@ -33,7 +34,7 @@ body{ font-family: 'Roboto Flex', sans-serif; background: var(--main-color); col
 }
 
   .mm-content{
-    padding-top: var(--mm-navbar-h);
+    padding-top: 4px;
     margin: 0 auto;
     backdrop-filter: blur(80px);
     margin-bottom: 0rem;
@@ -41,11 +42,11 @@ body{ font-family: 'Roboto Flex', sans-serif; background: var(--main-color); col
   }
 
 
-.mm-navbar{
-  position: fixed;
+.navbar{
+  background-color: #1a2335;
+  border-top: 0px solid #3e485c;
   top: 0; left: 0; right: 0;
-  height: var(--mm-navbar-h);
-  background-color: #f9fafc;
+  height: var(--navbar-h);
   z-index: 1300;
   display: flex; align-items: center;
   border-bottom: 1px solid var(--mm-border);
@@ -54,33 +55,33 @@ body{ font-family: 'Roboto Flex', sans-serif; background: var(--main-color); col
   transform: scaleX(1);  
 }
 
-.mm-navbar .navbar-inner{ width: 100%; margin: auto;
+.navbar .navbar-inner{ width: 100%; margin: auto;
   font-size: 13px;
   margin: 1rem;
   max-width:var(--max-width);
-  display: flex; align-items: center; gap: 30px;
+  display: flex; align-items: center; gap: 50px;
   padding-left: 2rem; padding-right: 4px;
 }
 
-.mm-navbar .brand{ display:flex; align-items:center; text-decoration:none;position: relative;}
-.mm-navbar .brand img{height:40px; width: auto; display:block; }
-.mm-navbar .brand2{ display:flex; align-items:center; text-decoration:none; position: relative;}
-.mm-navbar .brand2 img{ height: 30px; width: auto; display:block; }
-.mm-navbar .toplinks{ display:flex; gap: 1rem; margin-left: auto;}
+.navbar .brand{ display:flex; align-items:center; text-decoration:none;position: relative;}
+.navbar .brand img{height:30px; width: auto; display:block; }
+.navbar .brand2{ display:flex; align-items:center; text-decoration:none; position: relative;}
+.navbar .brand2 img{ height: 30px; width: auto; display:block; }
+.navbar .toplinks{ display:flex; gap: 1rem; margin-right: auto;}
 
 
-.mm-navbar .toplinks .link{ padding: 8px; 
+.navbar .toplinks .link{ padding: 16px; 
   text-decoration: none; 
-  color: var(--lil-text);
+  color: #ffffff;
   border: none; background: none;
 }
-.mm-navbar .toplinks .link:hover{
-  color: var(--mm-select); padding: 8px; 
+.navbar .toplinks .link:hover{
+  color: #6bb8ff; padding: 16px; 
   border: none; background: none;
   
 }
 
-.mm-navbar .toplinks .link {
+.navbar .toplinks .link {
   display: flex;
   align-items: center;
   gap: 3px;
@@ -93,22 +94,13 @@ body{ font-family: 'Roboto Flex', sans-serif; background: var(--main-color); col
   cursor: pointer;
   
 }
-.hamburger{
-  background:none;
-  border:none;
-  cursor: pointer;
-  color: var(--lil-text);
-
-}
 
 /* Main content area */
-
 .layout-wrapper {
   justify-content: center;
   display: flex;
   align-items: flex-start;
   background-color: var(--main-color);
-  padding-left: 2rem;
 }
 
 /* Separator */
@@ -121,9 +113,6 @@ margin-bottom: 1rem;}
 .mm-sep6{ height: var(--main-height); margin-right: 2rem;}
 .mm-sep7{ height: var(--main-height); width: 0px; background-color: var(--mm-border);}
 
-.resizer{
- cursor: ew-resize; position: relative; top: 300px; color: var(--lil-text); margin: -1rem;
-}
 
 /* Hover tooltip */
 .mm-tooltip{
@@ -177,19 +166,40 @@ margin-bottom: 1rem;}
   flex-direction:column; 
   align-items:center;
   justify-content: center;
-  margin-top: 1rem;
-
-  background-color: #ffffff;
-
-  max-height: 630px;
+  margin-top:6px;
+  background-color: none;
   min-width: 400px;
 }
+
+#anatomical-label {
+    position: absolute;
+    bottom: 30px; 
+    right: 36px;
+    color: white; 
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.4px;
+    z-index: 30; /* Keeps it above the 3D model */
+    
+    /* Crucial for readability over moving 3D elements */
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.8); 
+    pointer-events: none; /* So users don't accidentally highlight it while dragging */
+}
+
 .window {
   position: relative;
   /* CHANGE: Allow viewer to fill remaining width */
   flex-grow: 1;
-  background-image: radial-gradient(circle at center, #0a0a0a, #000000);
   overflow: hidden;
+
+    background: #000;
+    background-position: center;
+    backdrop-filter: blur(40px);
+      border-radius: 14px 0px 0px 14px;
+      min-height: var(--main-height);
+
+    background-size: 700px;
+    
 
   display: flex; 
   align-items: center; 
@@ -279,48 +289,23 @@ cursor: pointer;
 
 
 /* --------- Controls --------- */
-.controls{
-  background-color: #5b5b5b2e;
-  backdrop-filter: blur(12px);
-  border: 1px solid #50505035;
-  box-shadow: 1px 1px 70px 30px rgba(28, 28, 28, 0.519);
-  border-radius: 40px;
-  width: 50px;
-  height: 500px;
+.ext_controls{
+  width: 60px;
+  border-radius: 0px 14px 14px 0px;
+  height: var(--main-height);
+  margin: 6px 14px 0px 0px;
+  padding-top: 14px; 
+  padding-right: 2px;
+  border: 1px solid var(--mm-border);
+  background-color: var(--color2);
+
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center icons horizontally */
-  justify-content: flex-start; /* Start from top */
-  padding-top: 2rem; 
-}
-.controls-collapsible {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  overflow: hidden; /* Important for clean transition */
-  transition: max-height 0.3s ease, padding-top 0.3s ease;
-  max-height: 400px; /* arbitrary large value for 'open' state */
-  width: 100%;
+  align-items: center; 
+  gap: 14px;
 }
 
-.controls.is-closed .controls-collapsible {
-  max-height: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-.controls .mm-sep4 {
-  width: 70%;
-  height: 1px;
-  margin: 4px 0;
-  background: var(--mm-border);
-}
-.controls.is-closed .mm-sep4 {
-  margin: 0;
-  height: 0;
-}
-
-.controls-bottom {
+.ext_controls-bottom {
   cursor: pointer;
   padding-bottom: 1rem; 
   padding-top: 0.2rem; 
@@ -330,47 +315,44 @@ cursor: pointer;
   transition: transform 0.3s ease;
 }
 
-.controls.is-closed .controls-bottom svg {
+.ext_controls.is-closed .ext_controls-bottom svg {
   transform: rotate(180deg); /* Rotate chevron when closed */
 }
 
-.controls label{ display:flex; align-items:left; }
-.controls input{ margin-right:10px; }
+.ext_controls label{ display:flex; align-items:left; }
+.ext_controls input{ margin-right:10px; }
 
-.controls .mm-sep4 {
+.mm-sep4 {
   width: 70%;    
   height: 1px;  
   margin-top: 5px;
   background: var(--mm-border);
 }
 
-.ctrl-tog{
-  cursor: pointer;
-  color: #fff;
-}
-
-
 
 /* --- Rotation Slider --- */
 .rotation-controls {
-  background-color: #c2c2c220;
-  border: 1px solid var(--mm-border);
-  border-radius: 70px;
-  padding-left:1rem ;
-  padding-right: 1rem;
-  height: 32px;
-  bottom: 1rem;     
+  padding: 30px;
+  height: 80px;
+  bottom: 0px;     
   display: flex;
   justify-content: center;
   width: inherit;
-  margin: 1rem;
+  width: 800px;
+  left: 14px;
+
+  position: absolute;
+  z-index: 10;
+  background: linear-gradient(to top, #000000c7 70%, #0000000c 100%);
 }
+
+
 
 #rotation-slider {
   -webkit-appearance:none;
   appearance: none;
   background: transparent;
-  width: 100%;     
+  width: 60%;     
   cursor: grab;
 }
 #rotation-slider::-webkit-slider-runnable-track {
@@ -386,11 +368,11 @@ cursor: pointer;
 #rotation-slider::-webkit-slider-thumb {
   -webkit-appearance: none; /* Required here too */
   appearance: none;
-  width: 26px;              /* The little guy is finally bigger */
+  width: 30px;              /* The little guy is finally bigger */
   height: 12px;
   border-radius:6px;
   border: 1px solid var(--mm-border);
-  background: #ffffff;
+  background: #a7a7a7;
   cursor: grab;
   margin-top: -4px;         /* Keeps him centered on the 2px track */
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.00);}
@@ -415,12 +397,9 @@ cursor: pointer;
 
 /* --- Texture Toggle Styles --- */
 .viewer-hud-left {
-  position: absolute;
-  height: var(--main-height);
-  left: 1rem;
+  right: 0rem;
   font-size: var(--lil-text);
   font-weight: 400;
-  background:none;
   pointer-events: auto;
   display: flex;
   align-items: center;
@@ -433,7 +412,7 @@ cursor: pointer;
   border-radius: 999px;
   border: none;
   cursor: pointer;
-  color: #fff;
+  color: var(--lil-text);
   padding: 6px;
 }
 .hud-btn :hover{
@@ -448,50 +427,36 @@ cursor: pointer;
 
 
 
-.panel-group {
-  max-width: var(--max-width);
-  height: var(--main-color);
-  display: flex;
-  align-items: flex-start;
-  position: sticky;
-}
+
 
 .panel{
   height: var(--main-height);
-  width: 600px;
-  min-width: 400px;
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.02); 
-  border-left: 1px  solid var(--mm-border);
+  width: 400px;
+  border: 1px  solid var(--mm-border);
   backdrop-filter: blur(50px);
-  background-color: #ffffff;
+  background-color: var(--color2);
+  border-radius: 0px 14px 14px 0px;
+  margin: 6px 14px 0px 0px;
   pointer-events: auto;
   display: flex;
   flex-direction: column;
 }
 
 .panel-content {
-  padding: 2rem;
+  padding: 16px;
   overflow-y: auto;
   background-color: #c2c2c200;
   flex-grow: 1;
-  padding-top: 0;
+  padding-top: 6px;
   border-radius: var(--radius);
   border: 0px solid var(--mm-border);
 }
 
 .info-grid {
   display: grid;
-  grid-template-columns: 40% 1fr;
-  gap: 1.4rem;
   align-items: start;
 }
 
-#muscleImage {
-  width: 100%;
-  height: auto;
-  display: block;
-  margin-bottom: 1rem;
-}
 .info-text {
   display: flex;
   flex-direction: column;
@@ -499,49 +464,43 @@ cursor: pointer;
 .panel-section{
   display: flex;
   flex-direction: column;
-  gap:4px;
+  gap:0px;
 }
 
-.muscleName{
-  font-size: 24px;
-  font-weight: 600;
-  color: #1b1c1d;
-}
+
 .panel-header{
-  display: flex;
-  align-items: center;
+  border-radius: 0px 14px 0px 0px;
   border-bottom: 1px solid var(--mm-border);
-  margin-bottom: 1rem;
-  padding: 1rem 0 1rem 2rem;
-}
+  padding: 16px 0 14px 18px;
 
-.top-text{
-  display: grid;
-}
-
-
-
-.panel-section  .section-label h3{
-  gap: 0.3rem;
-  margin-top: 10px;
   display: flex;
   align-items: center;
-  text-align: left;
-  font-weight: 600;
-  color:#006aff;
-  }
 
-
-/* Optional: Ensure the icon and text align well */
-.info-text .section-label h3 {
-  padding-left: 0;
-  margin-top: 0;
+  background-color: none;
+  color: #132d5f;
+  font-size: 22px;
+  font-weight: 620;
 }
+        .panel-header svg{
+          position: absolute;
+          color: var(--lil-text);
+          right: 16px;
+        }
+          .panel-header svg:hover{
+            position: absolute;
+            right: 16px;
+            color: var(--mm-select);
+            cursor: pointer;
+          }
 
-.panel-section h3{line-height:1.5;font-size: 20px; color:var(--big-text); font-weight: 600;}
 
-.panel-section p{ line-height:1.5; color: var(--lil-text);}
+
+.panel-section h3{line-height: 34px;;font-size: 16px; color: var(--big-text); font-weight: 600;}
+
+.panel-section p{ line-height:24px; color: var(--lil-text);}
+
 #exerciseList{ list-style:none; margin:0; padding:0; }
+
 #exerciseList li{ color: var(--lil-text); display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;}
 #exerciseList li a{ color: var(--link-text); text-decoration:none; }
 #exerciseList li a:hover{ text-decoration:underline; }
@@ -553,17 +512,64 @@ html, body { overflow-x: hidden;}
   justify-content: center;
   align-items: center;
   max-width: var(--mm-index-w);
-  border-left: 1px solid var(--mm-border);
-  border-right: 0px solid var(--mm-border);
-  padding-top: 1rem;
-  background-color: #eef2f5;
+  height: var(--main-height);
+  background-color: var(--color2);
+  border: 1px solid var(--mm-border);
+  border-radius: 14px 0px 0px 14px;
+  margin: 6px 3px 0px 14px;
+}
+
+.upper-items a:hover{
+  background-color: #05a82e;
+  color: #fff;
+  text-decoration: none;
+}
+
+.upper-items{
+  display: flex;
+  flex-direction: column;
+  padding:8px;
+  gap: 2px;
+}
+
+.upper-button{
+  align-items: center;
+  display: flex;
+  gap: 6px;
+  transition: 0.1s ease;
+
+  font-size: var(--lil-text);
+  font-weight: var(--lil-text);
+
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 8px;
+  color: var(--lil-text);
+  border-radius: var(--radius);
+  text-decoration: none;
+}
+.upper-button:hover{
+  background: var(--mm-highlight);
+  border: none;
+  padding: 8px;
+  color: var(--mm-select);
+  cursor: pointer;
+}
+.upper-button:active{
+  background: var(--mm-select);
+  border: none;
+  padding: 8px;
+  color: #fff;
 }
 
 .index {
   width: var(--mm-index-w);
   min-width: 190px;
-  height : calc(var(--main-height) - 4.6rem);
+  height : calc(var(--main-height) - 18rem);
   overflow-y: auto;
+    font-size: 13px;
+    background-color: #eaeaea36;
 }
 
 ::-webkit-scrollbar {
@@ -578,7 +584,7 @@ html, body { overflow-x: hidden;}
   all: unset;
   box-sizing: border-box;
   width: 100%;
-  height: 34px;
+  height: 36px;
   cursor: pointer;
   color: var(--lil-text);
   display: flex;
@@ -610,35 +616,46 @@ right: unset;
 }
 
 .help-btn{
-  background:none;
-  padding: 8px;
-  display: flex; 
   align-items: center;
-  border-radius: 999px;
-  border: none;
-  cursor: pointer;
-  color: var(--lil-text);
-}
+  display: flex;
+  gap: 6px;
 
+  font-size: var(--lil-text);
+  font-weight: var(--lil-text);
+
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 8px;
+  color: var(--lil-text);
+  border-radius: var(--radius);
+  text-decoration: none;
+}
 .help-btn:hover{
   background: var(--mm-highlight);
-  padding: 8px;
-  border-radius: 999px;
   border: none;
-  cursor: pointer;
+  padding: 8px;
   color: var(--mm-select);
+  cursor: pointer;
+}
+.help-btn:active{
+  background: #05a82e;
+  border: none;
+  padding: 8px;
+  color: #fff;
 }
 
 .mi-search{
   opacity: 1;
-  width: 210px;
-  padding: 12px;   
+  width: 200px;
+  padding: 14px;   
+
   border-radius: var(--radius); 
   border: none;
   font-size: 14px;
   padding-left: 30px; 
-  background: #ffffff;
-  border: solid 1px var(--mm-border);
+  background: #8f8f8f24;
+  border: solid 0px var(--mm-border);
 }
 
 .searchy{
@@ -646,7 +663,6 @@ right: unset;
   align-items: center; 
   justify-content: center;
   align-content: center;
-  padding-bottom: 1rem;
   margin-left: 10px;
 }
 .searchy svg{
@@ -669,22 +685,28 @@ color: var(--lil-text);
   background: var(--mm-border);
   margin: 0 auto;
   max-width: var(--max-width);
-  margin-top: 4.3rem;
+  margin-top: 4rem;
+}
+.mm-sep10{
+  height: 1px;
+  margin-top: 6px;
+  margin: 4px;
+  background-color: var(--mm-border);
 }
 
 .mi-search:hover{
   outline: none;
   opacity: 1;
-  padding: 11px;
-  border: 2px solid var(--mm-select);   
+  padding: 13px;
+  border: 1px solid var(--mm-select);   
   background:#97d9ff24;
-  transition: 0.2s ease-in-out;
+  transition: 0.5s ease-in-out;
 }
 
 .mm-search-icon{
   position: absolute;
   left: 10px; 
-  top: 38%; /* Centers it vertically */
+  top: 49%; /* Centers it vertically */
   transform: translateY(-50%); 
   pointer-events: none; 
   color: #aaa; /* A muted color for the icon */
@@ -696,7 +718,8 @@ color: var(--lil-text);
 
 .soapbox {
   border-top: solid 1px var(--mm-border);
-  background-color: #f9fafc;
+  background-color: #e1e6ea;
+  margin-top: 14px;
   font-size: var(--lil-text); 
   color: var(--lil-text); 
   line-height: 1.8rem; 
@@ -727,14 +750,6 @@ color: var(--lil-text);
   font-size: 32px;
   color: var(--header-text);
 }
-.soapbox .aboutneula {
-  size: 50%;
-  max-width: 200px;
-  height: auto;
-  display: block;
-  margin-left: 18rem;
-  padding-bottom: 1rem;
-}
 
 .credits{
   font-size: 12px; color: #f0f0f0; text-align: center; line-height: 1.5rem; 
@@ -757,7 +772,7 @@ color: var(--lil-text);
 
 
 .references{
-  padding-top: calc(var(--mm-navbar-h) + 2rem);
+  padding-top: calc(var(--navbar-h) + 2rem);
   font-size: 12px; color: var(--lil-text); text-align: left; line-height: 1.5rem; 
   margin: 0 auto; 
   justify-content: left;
@@ -842,19 +857,22 @@ color: var(--lil-text);
 
 
 .close-overlay {
-  background: var(--mm-select);
+  background: #05a82e;
   color: #fff;
   border: none;
-  padding: 10px 24px;
-  border-radius: 999px;
+  padding: 12px;
+  margin-top: 20px;
+  width: 500px;
+  border-radius: 10px;
+
   cursor: pointer;
   font-size: 14px;
-  font-weight: 500;
-  transition: background 0.2s ease;
+  font-weight: 600;
+  transition: 0.2s ease;
 }
-
-.close-overlay:hover {
-  background: #005ce6;
+.close-overlay:hover{
+  background: #0fb939;
+  box-shadow: #05a82e39 1px 1px 10px;
 }
 
 
