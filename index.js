@@ -276,7 +276,7 @@ window.MUSCLE_INFO = window.MUSCLE_INFO || {
   };
 
   
-  const navbar = document.querySelector('.mm-navbar');
+  const navbar = document.querySelector('.navbar');
 
 navbar.addEventListener('mouseenter', () => {
   navbar.classList.remove('is-leaving');
