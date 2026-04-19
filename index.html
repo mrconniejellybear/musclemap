@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>Muscle Map - Demo</title>
@@ -28,46 +29,120 @@
 
 </head>
 
-
 <body>
-  
-<header class="mm-navbar" role="banner" aria-label="Site">
-  
 
-  <div class="navbar-inner">
-    <a class="brand" href="https://www.wwu.edu/">
-      <img id="logo" src="western_washington_universi.jpeg">
+  <header class="navbar" role="banner" aria-label="Site">
+  
+    <div class="navbar-inner">
+       <a class="brand" href="https://www.wwu.edu/">
+       <img id="logo" src="western_washington_universi.jpeg">
        </a>
        
     <nav class="toplinks" aria-label="Primary">
-  
        <a class="link" 
-        href="references.html">
-        References <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor"><xpath d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
-        </a>
+       href="references.html">References
+       </a>
   
-        <a class="link" href="mailto:cmausbis@outlook.com">
-       Contact <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor"><xpath d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+       <a class="link" href="mailto:cmausbis@outlook.com">
+       Contact
        </a>
 
        <a class="link" href="https://chss.wwu.edu/health-human-development/kinesiology">
-        WWU Kineseology<svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor"><xpath d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
-        </a>
-
-      </nav>
-       <button class="hamburger" id="themeToggle" aria-label="Toggle Dark/Light Theme">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M140-254.62v-59.99h680v59.99H140ZM140-450v-60h680v60H140Zm0-195.39v-59.99h680v59.99H140Z"/></svg>
-      </button>
- 
-</header>
+       WWU Kinesiology
+       </a>
+    </nav>
+  </header>
 
 
-<main class="mm-content">
+  <main class="mm-content">
   <div class="layout-wrapper">
+
+        <div class="left-hand">
+
+          <div class="upper-items">
+
+            <a class="upper-button" href="landing_pg.html">
+             <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor"><path d="M360-240 120-480l240-240 56 56-144 144h488v-160h80v240H272l144 144-56 56Z"/></svg>
+            </a>
+             
+             <div role="separator" aria-label="Separator" class="mm-sep10"></div>
+
+            <button class="upper-button">
+            <svg xmlns="http://www.w3.org/2000/svg" height="21px" viewBox="0 -960 960 960" width="21px" fill="currentColor"><path d="M400-240v-80h160v80H400ZM240-440v-80h480v80H240ZM120-640v-80h720v80H120Z"/></svg>              Filter Items
+            </button>
+
+             <button class="upper-button">
+             <svg xmlns="http://www.w3.org/2000/svg" height="21px" viewBox="0 -960 960 960" width="21px" fill="currentColor"><path d="M520-330v-60h160v60H520Zm60 210v-50h-60v-60h60v-50h60v160h-60Zm100-50v-60h160v60H680Zm40-110v-160h60v50h60v60h-60v50h-60Zm111-280h-83q-26-88-99-144t-169-56q-117 0-198.5 81.5T200-480q0 72 32.5 132t87.5 98v-110h80v240H160v-80h94q-62-50-98-122.5T120-480q0-75 28.5-140.5t77-114q48.5-48.5 114-77T480-840q129 0 226.5 79.5T831-560Z"/></svg>              Reset Filter
+             </button>
+
+             <button class="upper-button">
+              <svg xmlns="http://www.w3.org/2000/svg" height="21px" viewBox="0 -960 960 960" width="21px" fill="currentColor"><path d="M240-160 80-320l56-56 64 62v-446h80v446l64-62 56 56-160 160Zm240-40v-80h400v80H480Zm0-240v-80h400v80H480Zm0-240v-80h400v80H480Z"/></svg>
+              Collapse Index
+            </button>
+
+             <div role="separator" aria-label="Separator" class="mm-sep10"></div>
+          </div>
+
+    <div class="searchy">
+      <svg class="mm-search-icon" xmlns="http://www.w3.org/2000/svg" height="17px" viewBox="0 -960 960 960" width="17px" fill="currentColor"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
+      <input id="mi-search" class="mi-search" placeholder="Search or scroll..." aria-label="Search muscle...">
+    </div>
+    <div role="separator" aria-label="Separator" class="mm-sep9"></div>
+    <aside id="index" class="index">
+      <ul id="mi-list" class="mi-list" role="listbox" aria-label="All muscles"></ul>
+    </aside>
+    </div>
+
+      <div class="panel-group">
+  
+      <aside id="panel" class="panel" aria-label="Muscle Info">
+      <div class="panel-header"  id="muscleName">
+        Muscle Name <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M240-240v-480h80v480h-80Zm440 0L440-480l240-240 56 56-184 184 184 184-56 56Z"/></svg>
+      </div>
+        
+        <div class="panel-content">
+          <div class="info-grid">
+            <div class="info-text">
+
+              <div class="panel-section section-about">
+                <h3>Overview</h3>
+              </div>
+              <div class="panel-section section-desc">
+                <p id="info-desc"></p>
+              </div>
+
+              <div class="panel-section section-heads">
+                <h3>Anatomy</h3>
+                <p id="info-head"></p>
+              </div>
+            </div>
+          </div>
+          
+          
+          <div class="panel-section section-func">
+            <h3>Biomechanics</h3>
+            <p id="info-func"></p>
+          </div>
+
+          <div class="panel-section">
+            <h3>Functional Exercises</h3>
+            <ul id="exerciseList"></ul>
+          </div>
+          
+          <div class="panel-section">
+            <h3>Why Does This Work?</h3>
+            <p id="explanation"></p>
+          </div>
+        </div>
+      </aside>
+  
+    </div>
 
     <div class="viewer">
   <div class="viewer-frame">
     <div id="three-container" class="window">
+
+      <div id="anatomical-label">Anterior</div>
 
       <div class="instruction-overlay" id="instructionOverlay">
         <div class="instruction-content">
@@ -86,7 +161,7 @@
               to swap between models. </p>
 
               <p>When a muscle is selected, information on exercise and anatomy will populate below.</p>
-          <button class="close-overlay" id="closeOverlayBtn">Got it</button>
+          <button class="close-overlay" id="closeOverlayBtn">OK</button>
         </div>
       </div>
       
@@ -94,155 +169,78 @@
         <div class="spinner"></div>
       </div>
 
-      <div class="viewer-hud-right">
-        <button id="zoom-in-btn" class="zoom-btn" aria-label="Zoom In"><svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor"><path d="M450-290h60v-160h160v-60H510v-160h-60v160H290v60h160v160Zm30.07 190q-78.84 0-148.21-29.92t-120.68-81.21q-51.31-51.29-81.25-120.63Q100-401.1 100-479.93q0-78.84 29.92-148.21t81.21-120.68q51.29-51.31 120.63-81.25Q401.1-860 479.93-860q78.84 0 148.21 29.92t120.68 81.21q51.31 51.29 81.25 120.63Q860-558.9 860-480.07q0 78.84-29.92 148.21t-81.21 120.68q-51.29 51.31-120.63 81.25Q558.9-100 480.07-100Zm-.07-60q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg></button>
-
-        <button id="zoom-out-btn" class="zoom-btn" aria-label="Zoom Out"><svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="currentColor"><path d="M290-450h380v-60H290v60Zm190.07 350q-78.84 0-148.21-29.92t-120.68-81.21q-51.31-51.29-81.25-120.63Q100-401.1 100-479.93q0-78.84 29.92-148.21t81.21-120.68q51.29-51.31 120.63-81.25Q401.1-860 479.93-860q78.84 0 148.21 29.92t120.68 81.21q51.31 51.29 81.25 120.63Q860-558.9 860-480.07q0 78.84-29.92 148.21t-81.21 120.68q-51.29 51.31-120.63 81.25Q558.9-100 480.07-100Zm-.07-60q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg></button>
-      </div>
-
-      <div class="viewer-hud-left">
-        <div id="viewer-controls" class="controls"> 
-
-          <div id="controls-collapsible" class="controls-collapsible">
-
-          <button id="isolate-btn" class="hud-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M355.08-140H200q-24.92 0-42.46-17.54T140-200v-155.08q41.08-5 70.54-34.15Q240-418.39 240-460t-29.46-70.77q-29.46-29.15-70.54-34.15V-720q0-24.92 17.54-42.46T200-780h160q5.39-38.15 33.42-62.92 28.04-24.77 66.58-24.77t66.58 24.77Q554.61-818.15 560-780h160q24.92 0 42.46 17.54T780-720v160q38.15 5.39 62.92 33.42 24.77 28.04 24.77 66.58t-24.77 66.58Q818.15-365.39 780-360v160q0 24.92-17.54 42.46T720-140H564.92q-5.38-43.08-35.15-71.54Q500-240 460-240t-69.77 28.46q-29.77 28.46-35.15 71.54ZM200-200h108.46q20.54-52.92 64.89-76.46Q417.69-300 460-300t86.65 23.54Q591-252.92 611.54-200H720v-217.69h49.23q18.38-2.31 28.42-14.85 10.04-12.54 10.04-27.46 0-14.92-10.04-27.46-10.04-12.54-28.42-14.85H720V-720H502.31v-49.23q-2.31-18.38-14.85-28.42-12.54-10.04-27.46-10.04-14.92 0-27.46 10.04-12.54 10.04-14.85 28.42V-720H200v109.54q45.54 18.85 72.77 59.88Q300-509.54 300-460q0 48.92-27.23 89.96Q245.54-329 200-309.54V-200Zm260-260Z"/></svg>
-          </button>
-
-          <button id="texture-toggle-btn" class="hud-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M640-220q-31.62 0-60.96-7.69-29.35-7.7-55.27-22.08 49.54-44 76.73-103.92 27.19-59.93 27.19-126.31T600.5-606.31q-27.19-59.92-76.73-103.92 25.92-14.38 55.27-22.08Q608.38-740 640-740q108.54 0 184.27 75.73T900-480q0 108.54-75.73 184.27T640-220Zm-320 0q-108.54 0-184.27-75.73T60-480q0-108.54 75.73-184.27T320-740q31.62 0 60.96 7.69 29.35 7.7 55.27 22.08-12.38 10.54-23.34 22.81-10.96 12.27-20.89 25.27-15.77-8.54-33.96-13.2Q339.85-680 320-680q-83 0-141.5 58.5T120-480q0 83 58.5 141.5T320-280q19.85 0 38.04-4.65 18.19-4.66 33.96-13.2 9.93 13 20.89 25.27t23.34 22.81q-25.92 14.38-55.27 22.08Q351.62-220 320-220Zm160-56.16q-47.38-36.3-73.69-90Q380-419.85 380-480q0-60.15 26.31-113.84 26.31-53.7 73.69-90 47.38 36.3 73.69 90Q580-540.15 580-480q0 60.15-26.31 113.84-26.31 53.7-73.69 90Z"/></svg>
-          </button>
-
-          <button id="center-btn" class="hud-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M212.31-140Q182-140 161-161q-21-21-21-51.31V-360h60v147.69q0 4.62 3.85 8.46 3.84 3.85 8.46 3.85H360v60H212.31ZM600-140v-60h147.69q4.62 0 8.46-3.85 3.85-3.84 3.85-8.46V-360h60v147.69Q820-182 799-161q-21 21-51.31 21H600ZM140-600v-147.69Q140-778 161-799q21-21 51.31-21H360v60H212.31q-4.62 0-8.46 3.85-3.85 3.84-3.85 8.46V-600h-60Zm620 0v-147.69q0-4.62-3.85-8.46-3.84-3.85-8.46-3.85H600v-60h147.69Q778-820 799-799q21 21 21 51.31V-600h-60ZM480-300q-74.92 0-127.46-52.54Q300-405.08 300-480q0-74.92 52.54-127.46Q405.08-660 480-660q74.92 0 127.46 52.54Q660-554.92 660-480q0 74.92-52.54 127.46Q554.92-300 480-300Zm0-60q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0-120Z"/></svg>
-            </button>
-            
-
-          <div class="mm-sep4" role="separator"></div>
-
-          <div id="controls-toggle-btn" class="ctrl-tog controls-bottom" role="button" aria-expanded="true" aria-controls="controls-collapsible" tabindex="0">
-            <svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="26px" fill="currentColor"><path d="m387.69-100-15.23-121.85q-16.07-5.38-32.96-15.07-16.88-9.7-30.19-20.77L196.46-210l-92.3-160 97.61-73.77q-1.38-8.92-1.96-17.92-.58-9-.58-17.93 0-8.53.58-17.34t1.96-19.27L104.16-590l92.3-159.23 112.46 47.31q14.47-11.46 30.89-20.96t32.27-15.27L387.69-860h184.62l15.23 122.23q18 6.54 32.57 15.27 14.58 8.73 29.43 20.58l114-47.31L855.84-590l-99.15 74.92q2.15 9.69 2.35 18.12.19 8.42.19 16.96 0 8.15-.39 16.58-.38 8.42-2.76 19.27L854.46-370l-92.31 160-112.61-48.08q-14.85 11.85-30.31 20.96-15.46 9.12-31.69 14.89L572.31-100H387.69ZM440-160h78.62L533-267.15q30.62-8 55.96-22.73 25.35-14.74 48.89-37.89L737.23-286l39.39-68-86.77-65.38q5-15.54 6.8-30.47 1.81-14.92 1.81-30.15 0-15.62-1.81-30.15-1.8-14.54-6.8-29.7L777.38-606 738-674l-100.54 42.38q-20.08-21.46-48.11-37.92-28.04-16.46-56.73-23.31L520-800h-79.38l-13.24 106.77q-30.61 7.23-56.53 22.15-25.93 14.93-49.47 38.46L222-674l-39.38 68L269-541.62q-5 14.24-7 29.62t-2 32.38q0 15.62 2 30.62 2 15 6.62 29.62l-86 65.38L222-286l99-42q22.77 23.38 48.69 38.31 25.93 14.92 57.31 22.92L440-160Zm40.46-200q49.92 0 84.96-35.04 35.04-35.04 35.04-84.96 0-49.92-35.04-84.96Q530.38-600 480.46-600q-50.54 0-85.27 35.04T360.46-480q0 49.92 34.73 84.96Q429.92-360 480.46-360ZM480-480Z"/></svg>
-          </div>
-          </div>
-        </div> 
-      </div>
-
-    </div>
-  </div>
-
-<div class="under"> 
-  <button class="help-btn">  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M508.5-267.21q11.81-11.83 11.81-28.97 0-17.13-11.83-28.94-11.83-11.8-28.96-11.8-17.13 0-28.94 11.83-11.81 11.83-11.81 28.96 0 17.13 11.83 28.94 11.83 11.8 28.96 11.8 17.13 0 28.94-11.82Zm-57.27-131.41h56.31q.77-29.53 8.65-47.19 7.89-17.65 38.27-46.8 26.39-26.39 40.42-48.74 14.04-22.34 14.04-52.77 0-51.65-37.11-80.69-37.12-29.03-87.81-29.03-50.08 0-82.88 26.73-32.81 26.73-46.81 62.96l51.38 20.61q7.31-19.92 25-38.81 17.69-18.88 52.54-18.88 35.46 0 52.42 19.42 16.97 19.43 16.97 42.73 0 20.39-11.62 37.31-11.61 16.92-29.61 32.69-39.39 35.54-49.77 56.7-10.39 21.15-10.39 63.76ZM480.07-100q-78.84 0-148.21-29.92t-120.68-81.21q-51.31-51.29-81.25-120.63Q100-401.1 100-479.93q0-78.84 29.92-148.21t81.21-120.68q51.29-51.31 120.63-81.25Q401.1-860 479.93-860q78.84 0 148.21 29.92t120.68 81.21q51.31 51.29 81.25 120.63Q860-558.9 860-480.07q0 78.84-29.92 148.21t-81.21 120.68q-51.29 51.31-120.63 81.25Q558.9-100 480.07-100Zm-.07-60q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg></button>
-  
-
-  <div class="rotation-controls">
-    
+        <div class="rotation-controls">    
     <input type="range" id="rotation-slider" min="0" max="360" value="0" aria-label="Rotate Model">
+                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M440-183v-274L200-596v274l240 139Zm80 0 240-139v-274L520-457v274Zm-40-343 237-137-237-137-237 137 237 137ZM160-252q-19-11-29.5-29T120-321v-318q0-22 10.5-40t29.5-29l280-161q19-11 40-11t40 11l280 161q19 11 29.5 29t10.5 40v318q0 22-10.5 40T800-252L520-91q-19 11-40 11t-40-11L160-252Zm320-228Z"/></svg>
+  
+  </div>
+    </div>
+    
+  </div>
+</div>
+
+  <div id="viewer-ext_controls" class="ext_controls"> 
+
+      <button id="isolate-btn" class="upper-button">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M352-120H200q-33 0-56.5-23.5T120-200v-152q48 0 84-30.5t36-77.5q0-47-36-77.5T120-568v-152q0-33 23.5-56.5T200-800h160q0-42 29-71t71-29q42 0 71 29t29 71h160q33 0 56.5 23.5T800-720v160q42 0 71 29t29 71q0 42-29 71t-71 29v160q0 33-23.5 56.5T720-120H568q0-50-31.5-85T460-240q-45 0-76.5 35T352-120Zm-152-80h85q24-66 77-93t98-27q45 0 98 27t77 93h85v-240h80q8 0 14-6t6-14q0-8-6-14t-14-6h-80v-240H480v-80q0-8-6-14t-14-6q-8 0-14 6t-6 14v80H200v88q54 20 87 67t33 105q0 57-33 104t-87 68v88Zm260-260Z"/></svg>          
+      </button>
+
+      <button id="texture-toggle-btn" class="upper-button">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M324-111.5Q251-143 197-197t-85.5-127Q80-397 80-480t31.5-156Q143-709 197-763t127-85.5Q397-880 480-880t156 31.5Q709-817 763-763t85.5 127Q880-563 880-480t-31.5 156Q817-251 763-197t-127 85.5Q563-80 480-80t-156-31.5ZM520-163q119-15 199.5-104.5T800-480q0-123-80.5-212.5T520-797v634Z"/></svg>          
+      </button>
+
+      <button id="center-btn" class="upper-button">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M440-40v-167l-44 43-56-56 140-140 140 140-56 56-44-43v167h-80ZM220-340l-56-56 43-44H40v-80h167l-43-44 56-56 140 140-140 140Zm520 0L600-480l140-140 56 56-43 44h167v80H753l43 44-56 56Zm-260-80q-25 0-42.5-17.5T420-480q0-25 17.5-42.5T480-540q25 0 42.5 17.5T540-480q0 25-17.5 42.5T480-420Zm0-180L340-740l56-56 44 43v-167h80v167l44-43 56 56-140 140Z"/></svg>           
+      </button>
+            
+           <div class="mm-sep4" role="separator"></div>
+
+      <button id="help-btn" class="help-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M513.5-254.5Q528-269 528-290t-14.5-35.5Q499-340 478-340t-35.5 14.5Q428-311 428-290t14.5 35.5Q457-240 478-240t35.5-14.5ZM442-394h74q0-33 7.5-52t42.5-52q26-26 41-49.5t15-56.5q0-56-41-86t-97-30q-57 0-92.5 30T342-618l66 26q5-18 22.5-39t53.5-21q32 0 48 17.5t16 38.5q0 20-12 37.5T506-526q-44 39-54 59t-10 73Zm38 314q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
+      </button>
+      
+      <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" width="28px" fill="currentColor"><path d="m387.69-100-15.23-121.85q-16.07-5.38-32.96-15.07-16.88-9.7-30.19-20.77L196.46-210l-92.3-160 97.61-73.77q-1.38-8.92-1.96-17.92-.58-9-.58-17.93 0-8.53.58-17.34t1.96-19.27L104.16-590l92.3-159.23 112.46 47.31q14.47-11.46 30.89-20.96t32.27-15.27L387.69-860h184.62l15.23 122.23q18 6.54 32.57 15.27 14.58 8.73 29.43 20.58l114-47.31L855.84-590l-99.15 74.92q2.15 9.69 2.35 18.12.19 8.42.19 16.96 0 8.15-.39 16.58-.38 8.42-2.76 19.27L854.46-370l-92.31 160-112.61-48.08q-14.85 11.85-30.31 20.96-15.46 9.12-31.69 14.89L572.31-100H387.69ZM440-160h78.62L533-267.15q30.62-8 55.96-22.73 25.35-14.74 48.89-37.89L737.23-286l39.39-68-86.77-65.38q5-15.54 6.8-30.47 1.81-14.92 1.81-30.15 0-15.62-1.81-30.15-1.8-14.54-6.8-29.7L777.38-606 738-674l-100.54 42.38q-20.08-21.46-48.11-37.92-28.04-16.46-56.73-23.31L520-800h-79.38l-13.24 106.77q-30.61 7.23-56.53 22.15-25.93 14.93-49.47 38.46L222-674l-39.38 68L269-541.62q-5 14.24-7 29.62t-2 32.38q0 15.62 2 30.62 2 15 6.62 29.62l-86 65.38L222-286l99-42q22.77 23.38 48.69 38.31 25.93 14.92 57.31 22.92L440-160Zm40.46-200q49.92 0 84.96-35.04 35.04-35.04 35.04-84.96 0-49.92-35.04-84.96Q530.38-600 480.46-600q-50.54 0-85.27 35.04T360.46-480q0 49.92 34.73 84.96Q429.92-360 480.46-360ZM480-480Z"/></svg>
   </div>
 
-  <button class="help-btn"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M427.73-117.92q-21.96-21-23.88-51.31h152.3q-1.92 30.31-23.88 51.31-21.96 21-52.27 21-30.31 0-52.27-21ZM480-800q-44.38 0-83.23 16.27t-67.85 44.04l-43.38-42.15q40.23-37.24 89.08-57.7Q423.46-860 480-860q116.92 0 198.46 81.54T760-580q0 65.61-23.27 112.85-23.27 47.23-55.65 80.38l-42.16-42.15q22.16-23 41.62-60.35Q700-526.62 700-580q0-92-64-156t-156-64Zm347.23 672.61-42.77 42.77L529.08-340H336.15q-62.84-39.08-99.49-102.12Q200-505.15 200-580q0-20.38 3.08-41.12 3.08-20.73 8.46-36.42L81.39-788.92l42.15-42.16 703.69 703.69ZM354-400h115.08l-206-206q-1.16 5.46-2.12 12.42-.96 6.96-.96 13.58 0 54 24.5 101t69.5 79Zm6.69-108.39Zm118.23-80.92Zm154.77 304.69v60H330v-60h303.69Z"/></svg></button>
-
-  <button class="help-btn"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M798.15-73.7 690.62-180H172.31Q142-180 121-201q-21-21-21-51.31v-455.38Q100-738 121-759q21-21 51.31-21h3.85l59.99 60h-63.84q-4.62 0-8.46 3.85-3.85 3.84-3.85 8.46v455.38q0 5.39 3.46 8.85t8.85 3.46h458.31l-91.54-91.54H251.54v-60h227.54L60.62-811.23l42.15-42.15L840.3-115.85 798.15-73.7Zm52.62-145.69L800-270.15v-437.54q0-5.39-3.46-8.85t-8.85-3.46H350.15l-59.99-60h497.53Q818-780 839-759q21 21 21 51.31v452.92q0 9.85-1.81 18.69-1.81 8.85-7.42 16.69ZM587.08-483.08l-60-60h181.38v60H587.08Zm-335.54 0v-60h60v60h-60Zm323.54-12Zm-174 25.54Z"/></svg></button>
-</div>
-</div>
-
-    <div class="panel-group">
-  
-      <aside id="panel" class="panel" aria-label="Muscle Info">
-        <div class="panel-header">
-        <h2 class="muscleName" id="muscleName"> Muscle Name</h2>
-        </div>
-        <div class="panel-content">
-          <div class="info-grid">
-            <img id="muscleImage" src="" alt="Selected muscle">
-            <div class="info-text">
-
-              <div class="top-text">
-        
-              </div>
-
-              <div class="panel-section section-about">
-                <h3>Anatomy</h3>
-              </div>
-              <div class="panel-section section-desc">
-                <p id="info-desc"></p>
-              </div>
-              <div class="panel-section section-heads">
-                <h3>Heads</h3>
-                <p id="info-head"></p>
-              </div>
-            </div>
-          </div>
-          
-          
-          <div class="panel-section section-func">
-            <h3>Biomechanics and Function</h3>
-            <p id="info-func"></p>
-            <div class="mm-sep2" role="separator"></div>
-          </div>
-
-          <div class="panel-section">
-            <h3>How Can I Train the Muscle?</h3>
-            <ul id="exerciseList"></ul>
-          </div>
-          
-          <div class="panel-section">
-            <div class="mm-sep2" role="separator"></div>
-            <h3>Why Does This Work?</h3>
-            <p id="explanation"></p>
-          </div>
-        </div>
-      </aside>
-  
-    </div>
-
-    <div class="left-hand">
-    <div class="searchy">
-      <svg class="mm-search-icon" xmlns="http://www.w3.org/2000/svg" height="17px" viewBox="0 -960 960 960" width="17px" fill="currentColor"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
-      <input id="mi-search" class="mi-search" placeholder="Search or scroll..." aria-label="Search muscle...">
-    </div>
-    <div role="separator" aria-label="Separator" class="mm-sep9"></div>
-    <aside id="index" class="index">
-      <ul id="mi-list" class="mi-list" role="listbox" aria-label="All muscles"></ul>
-    </aside>
-    </div>
-
   </div>
-</main>
+  </main>
 
     <section class="soapbox"> 
+
       <p>I am an undergraduate research assistant at Western Washington University studying behavioral neuroscience. When I started this site, there was no existing index of the muscular system. While textbooks and websites offered provided a necessary foundation for MuscleMap, a 3D model offers a more hands-on, interactive learning opportunity. High-quality information—especially information about the human body body—should never be used for profit. Information should be free and accessible for everyone.</p>
-    
+      
       <p>Western Washington University has supported this project by hosting it as a part of their kinesology program. The images, models, and exercise claims featured on this site have been approved by <a href="https://chss.wwu.edu/health-human-development/sanjuab">Professor Jun G. San Juan, PhD, ATC</a>, and are additionally supported by external sources. The ecorche was modeled and licensed by <a href="https://www.artstation.com/alexlashko">Alex Lashko</a>.</p>
-    
+      
       <p>In the future, I plan to expand this site to other areas of the body, such as the brain and skeleton. For now, given that I am developing and hosting this website independently, any feedback, positive or negative, that helps me improve the site is welcome and appreciated; My links can be found below. — Thank you for giving your time to my work! </p>
     </section>
 
     <footer class="atsocials">
-      <a href="https://www.linkedin.com/in/connor-mausolf-ab84a0280/">Linkedin <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="16" height="16" viewBox="0 0 50 50">
-    <path d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z"></path>
-</svg></a>
+      <a href="https://www.linkedin.com/in/connormaus">Linkedin <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="16" height="16" viewBox="0 0 50 50">
+      <path d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z"></path>
+  </svg></a>
 
-      <a href="https://github.com/superstarconnor/musclemap">GitHub <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="16" height="16" viewBox="0 0 50 50">
-    <path d="M17.791,46.836C18.502,46.53,19,45.823,19,45v-5.4c0-0.197,0.016-0.402,0.041-0.61C19.027,38.994,19.014,38.997,19,39 c0,0-3,0-3.6,0c-1.5,0-2.8-0.6-3.4-1.8c-0.7-1.3-1-3.5-2.8-4.7C8.9,32.3,9.1,32,9.7,32c0.6,0.1,1.9,0.9,2.7,2c0.9,1.1,1.8,2,3.4,2 c2.487,0,3.82-0.125,4.622-0.555C21.356,34.056,22.649,33,24,33v-0.025c-5.668-0.182-9.289-2.066-10.975-4.975 c-3.665,0.042-6.856,0.405-8.677,0.707c-0.058-0.327-0.108-0.656-0.151-0.987c1.797-0.296,4.843-0.647,8.345-0.714 c-0.112-0.276-0.209-0.559-0.291-0.849c-3.511-0.178-6.541-0.039-8.187,0.097c-0.02-0.332-0.047-0.663-0.051-0.999 c1.649-0.135,4.597-0.27,8.018-0.111c-0.079-0.5-0.13-1.011-0.13-1.543c0-1.7,0.6-3.5,1.7-5c-0.5-1.7-1.2-5.3,0.2-6.6 c2.7,0,4.6,1.3,5.5,2.1C21,13.4,22.9,13,25,13s4,0.4,5.6,1.1c0.9-0.8,2.8-2.1,5.5-2.1c1.5,1.4,0.7,5,0.2,6.6c1.1,1.5,1.7,3.2,1.6,5 c0,0.484-0.045,0.951-0.11,1.409c3.499-0.172,6.527-0.034,8.204,0.102c-0.002,0.337-0.033,0.666-0.051,0.999 c-1.671-0.138-4.775-0.28-8.359-0.089c-0.089,0.336-0.197,0.663-0.325,0.98c3.546,0.046,6.665,0.389,8.548,0.689 c-0.043,0.332-0.093,0.661-0.151,0.987c-1.912-0.306-5.171-0.664-8.879-0.682C35.112,30.873,31.557,32.75,26,32.969V33 c2.6,0,5,3.9,5,6.6V45c0,0.823,0.498,1.53,1.209,1.836C41.37,43.804,48,35.164,48,25C48,12.318,37.683,2,25,2S2,12.318,2,25 C2,35.164,8.63,43.804,17.791,46.836z"></path>
-</svg></a>
+        <a href="https://github.com/superstarconnor/musclemap">GitHub <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="16" height="16" viewBox="0 0 50 50">
+      <path d="M17.791,46.836C18.502,46.53,19,45.823,19,45v-5.4c0-0.197,0.016-0.402,0.041-0.61C19.027,38.994,19.014,38.997,19,39 c0,0-3,0-3.6,0c-1.5,0-2.8-0.6-3.4-1.8c-0.7-1.3-1-3.5-2.8-4.7C8.9,32.3,9.1,32,9.7,32c0.6,0.1,1.9,0.9,2.7,2c0.9,1.1,1.8,2,3.4,2 c2.487,0,3.82-0.125,4.622-0.555C21.356,34.056,22.649,33,24,33v-0.025c-5.668-0.182-9.289-2.066-10.975-4.975 c-3.665,0.042-6.856,0.405-8.677,0.707c-0.058-0.327-0.108-0.656-0.151-0.987c1.797-0.296,4.843-0.647,8.345-0.714 c-0.112-0.276-0.209-0.559-0.291-0.849c-3.511-0.178-6.541-0.039-8.187,0.097c-0.02-0.332-0.047-0.663-0.051-0.999 c1.649-0.135,4.597-0.27,8.018-0.111c-0.079-0.5-0.13-1.011-0.13-1.543c0-1.7,0.6-3.5,1.7-5c-0.5-1.7-1.2-5.3,0.2-6.6 c2.7,0,4.6,1.3,5.5,2.1C21,13.4,22.9,13,25,13s4,0.4,5.6,1.1c0.9-0.8,2.8-2.1,5.5-2.1c1.5,1.4,0.7,5,0.2,6.6c1.1,1.5,1.7,3.2,1.6,5 c0,0.484-0.045,0.951-0.11,1.409c3.499-0.172,6.527-0.034,8.204,0.102c-0.002,0.337-0.033,0.666-0.051,0.999 c-1.671-0.138-4.775-0.28-8.359-0.089c-0.089,0.336-0.197,0.663-0.325,0.98c3.546,0.046,6.665,0.389,8.548,0.689 c-0.043,0.332-0.093,0.661-0.151,0.987c-1.912-0.306-5.171-0.664-8.879-0.682C35.112,30.873,31.557,32.75,26,32.969V33 c2.6,0,5,3.9,5,6.6V45c0,0.823,0.498,1.53,1.209,1.836C41.37,43.804,48,35.164,48,25C48,12.318,37.683,2,25,2S2,12.318,2,25 C2,35.164,8.63,43.804,17.791,46.836z"></path>
+  </svg></a>
 
-      <a href="https://www.instagram.com/mrconniejellybear/">Email <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="16" height="16" viewBox="0,0,256,256">
-<g fill="#1a1a1a" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M25.50586,4.02539c-1.325,0.00125 -2.65164,0.37977 -3.80664,1.13477l-15.19922,9.85937c-0.93,0.6 -1.5,1.64 -1.5,2.75v1.04102c0,0.06 -0.00023,0.12945 0.00977,0.18945h8.83984l15.38086,-9.76953c0.69,-0.44 1.09867,-1.1607 1.13867,-1.9707c0.03,-0.8 -0.30945,-1.5393 -0.93945,-2.0293l-0.01953,-0.01953l-0.09961,-0.06055c-1.155,-0.75 -2.47969,-1.12625 -3.80469,-1.125zM32.35938,7.13086v0.21875c-0.06,1.47 -0.80859,2.77055 -2.05859,3.56055l-13.14062,8.34961c2.2,0.69 3.81984,2.75945 3.83984,5.18945l16.14063,-10.22852c0.71,-0.45 1.10938,-1.18148 1.10938,-2.02148c0,-0.7 -0.29078,-1.32953 -0.80078,-1.76953zM40.25,12.25c-0.02,1.49 -0.76906,2.86016 -2.03906,3.66016l-17.21094,10.91016v3.39063l3.66992,2.30859l20.21094,-12.67969c0.7,-0.44 1.11914,-1.18977 1.11914,-2.00977v-0.06055c0,-1.12 -0.56,-2.15977 -1.5,-2.75976zM4.5,21c-1.933,0 -3.5,1.567 -3.5,3.5v11c0,1.933 1.567,3.5 3.5,3.5h11c1.933,0 3.5,-1.567 3.5,-3.5v-11c0,-1.933 -1.567,-3.5 -3.5,-3.5zM46,21.5c-0.02,0.01 -0.03078,0.0193 -0.05078,0.0293l-19.39844,12.18164l4.42969,2.78906c1.66,1.05 2.65039,2.85055 2.65039,4.81055c0,1.41 -0.51133,2.69945 -1.36133,3.68945h7.73047c3.31,0 6,-2.69 6,-6zM10.11523,24.79883c1.446,0 2.62325,0.47211 3.53125,1.41211c0.912,0.941 1.36719,2.17975 1.36719,3.71875c0,1.581 -0.47102,2.85622 -1.41602,3.82422c-0.94,0.964 -2.15458,1.44531 -3.64258,1.44531c-1.451,0 -2.64227,-0.46634 -3.57227,-1.40234c-0.931,-0.936 -1.39648,-2.15806 -1.39648,-3.66406c0,-1.591 0.47297,-2.87738 1.41797,-3.85937c0.945,-0.983 2.18094,-1.47461 3.71094,-1.47461zM10.05273,26.7793c-0.805,0 -1.45236,0.29662 -1.94336,0.89063c-0.491,0.589 -0.73828,1.37075 -0.73828,2.34375c0,0.987 0.24728,1.76875 0.73828,2.34375c0.491,0.571 1.11972,0.85742 1.88672,0.85742c0.791,0 1.42816,-0.27994 1.91016,-0.83594c0.482,-0.557 0.72266,-1.33027 0.72266,-2.32227c0,-1.034 -0.23317,-1.83806 -0.70117,-2.41406c-0.468,-0.575 -1.093,-0.86328 -1.875,-0.86328zM21,32.57031v2.92969c0,3.03 -2.47,5.5 -5.5,5.5h-10.11914c0.86,2.34 3.10828,4 5.73828,4h16.83008c0.97,0 1.85172,-0.38 2.51172,-1c0.72,-0.67 1.16992,-1.62945 1.16992,-2.68945c0,-1.27 -0.6407,-2.44109 -1.7207,-3.12109l-5.24023,-3.29883l-2.5293,-1.60156z"></path></g></g>
-</svg></a>
+        <a href="https://www.instagram.com/mrconniejellybear/">Email <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="16" height="16" viewBox="0,0,256,256">
+  <g fill="#1a1a1a" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.12,5.12)"><path d="M25.50586,4.02539c-1.325,0.00125 -2.65164,0.37977 -3.80664,1.13477l-15.19922,9.85937c-0.93,0.6 -1.5,1.64 -1.5,2.75v1.04102c0,0.06 -0.00023,0.12945 0.00977,0.18945h8.83984l15.38086,-9.76953c0.69,-0.44 1.09867,-1.1607 1.13867,-1.9707c0.03,-0.8 -0.30945,-1.5393 -0.93945,-2.0293l-0.01953,-0.01953l-0.09961,-0.06055c-1.155,-0.75 -2.47969,-1.12625 -3.80469,-1.125zM32.35938,7.13086v0.21875c-0.06,1.47 -0.80859,2.77055 -2.05859,3.56055l-13.14062,8.34961c2.2,0.69 3.81984,2.75945 3.83984,5.18945l16.14063,-10.22852c0.71,-0.45 1.10938,-1.18148 1.10938,-2.02148c0,-0.7 -0.29078,-1.32953 -0.80078,-1.76953zM40.25,12.25c-0.02,1.49 -0.76906,2.86016 -2.03906,3.66016l-17.21094,10.91016v3.39063l3.66992,2.30859l20.21094,-12.67969c0.7,-0.44 1.11914,-1.18977 1.11914,-2.00977v-0.06055c0,-1.12 -0.56,-2.15977 -1.5,-2.75976zM4.5,21c-1.933,0 -3.5,1.567 -3.5,3.5v11c0,1.933 1.567,3.5 3.5,3.5h11c1.933,0 3.5,-1.567 3.5,-3.5v-11c0,-1.933 -1.567,-3.5 -3.5,-3.5zM46,21.5c-0.02,0.01 -0.03078,0.0193 -0.05078,0.0293l-19.39844,12.18164l4.42969,2.78906c1.66,1.05 2.65039,2.85055 2.65039,4.81055c0,1.41 -0.51133,2.69945 -1.36133,3.68945h7.73047c3.31,0 6,-2.69 6,-6zM10.11523,24.79883c1.446,0 2.62325,0.47211 3.53125,1.41211c0.912,0.941 1.36719,2.17975 1.36719,3.71875c0,1.581 -0.47102,2.85622 -1.41602,3.82422c-0.94,0.964 -2.15458,1.44531 -3.64258,1.44531c-1.451,0 -2.64227,-0.46634 -3.57227,-1.40234c-0.931,-0.936 -1.39648,-2.15806 -1.39648,-3.66406c0,-1.591 0.47297,-2.87738 1.41797,-3.85937c0.945,-0.983 2.18094,-1.47461 3.71094,-1.47461zM10.05273,26.7793c-0.805,0 -1.45236,0.29662 -1.94336,0.89063c-0.491,0.589 -0.73828,1.37075 -0.73828,2.34375c0,0.987 0.24728,1.76875 0.73828,2.34375c0.491,0.571 1.11972,0.85742 1.88672,0.85742c0.791,0 1.42816,-0.27994 1.91016,-0.83594c0.482,-0.557 0.72266,-1.33027 0.72266,-2.32227c0,-1.034 -0.23317,-1.83806 -0.70117,-2.41406c-0.468,-0.575 -1.093,-0.86328 -1.875,-0.86328zM21,32.57031v2.92969c0,3.03 -2.47,5.5 -5.5,5.5h-10.11914c0.86,2.34 3.10828,4 5.73828,4h16.83008c0.97,0 1.85172,-0.38 2.51172,-1c0.72,-0.67 1.16992,-1.62945 1.16992,-2.68945c0,-1.27 -0.6407,-2.44109 -1.7207,-3.12109l-5.24023,-3.29883l-2.5293,-1.60156z"></path></g></g>
+  </svg></a>
 
-      <a href="https://chss.wwu.edu/health-human-development/kinesiology">WWU <svg xmlns="http://www.w3.org/2000/svg" height="19px" viewBox="0 -960 960 960" width="19px" fill="#1a1a1a"><path d="M840-280v-276L480-360 40-600l440-240 440 240v320h-80ZM480-120 200-272v-200l280 152 280-152v200L480-120Z"/></svg></a>
+        <a href="https://chss.wwu.edu/health-human-development/kinesiology">WWU <svg xmlns="http://www.w3.org/2000/svg" height="19px" viewBox="0 -960 960 960" width="19px" fill="#1a1a1a"><path d="M840-280v-276L480-360 40-600l440-240 440 240v320h-80ZM480-120 200-272v-200l280 152 280-152v200L480-120Z"/></svg></a>
     </footer>
 
-<footer class="credits">
-  <div class="credit-box"> 
-    Created by <a href="https://www.instagram.com/allstarconnor">Connor Mausolf</a>
-    - BS Psychology, in association with <a href="https://www.wwu.edu/">Western Washington University</a></p>
-    <p> 
-    Model by <a href="https://alexlashko.com/">Alex Lashko</a> | .OBJ controls sourced from Three.js
-    <a href="https://threejs.org/docs/#examples/en/controls/OrbitControls">Orbit Controls</a> |
-    Icons and typeface sourced from <a href="https://fonts.google.com/icons?icon.size=24&icon.color=%23e3e3e3&selected=Material+Symbols+Outlined:tonality:FILL@0;wght@400;GRAD@0;opsz@24">Google Materials</a> |
-    Images from <a href="https://www.wikimedia.org/">Wikimedia Commons</a></p>
-</div>
-</footer>
+    <footer class="credits">
+      <div class="credit-box"> 
+      Created by <a href="https://www.instagram.com/allstarconnor">Connor Mausolf</a>
+      - BS Psychology, in association with <a href="https://www.wwu.edu/">Western Washington University</a></p>
+      <p> 
+      Model by <a href="https://alexlashko.com/">Alex Lashko</a> | .OBJ controls sourced from Three.js
+      <a href="https://threejs.org/docs/#examples/en/controls/OrbitControls">Orbit Controls</a> |
+      Icons and typeface sourced from <a href="https://fonts.google.com/icons?icon.size=24&icon.color=%23e3e3e3&selected=Material+Symbols+Outlined:tonality:FILL@0;wght@400;GRAD@0;opsz@24">Google Materials</a> |
+      Images from <a href="https://www.wikimedia.org/">Wikimedia Commons</a></p>
+      </div>
+    </footer>
+
 </body>
 </html>
