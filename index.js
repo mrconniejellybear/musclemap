@@ -467,5 +467,76 @@ navbar.addEventListener('mouseleave', () => {
   } else { bindResizer(); }
 
 
-  
+  /* --- Info Overlay Logic --- */
+document.addEventListener('DOMContentLoaded', () => {
+  const helpBtn = document.getElementById('help-btn');
+  const overlay = document.getElementById('instructionOverlay');
+  const closeBtn = document.getElementById('closeOverlayBtn');
+
+  if (helpBtn && overlay && closeBtn) {
+    helpBtn.addEventListener('click', () => {
+      overlay.classList.add('is-visible');
+    });
+
+    closeBtn.addEventListener('click', () => {
+      overlay.classList.remove('is-visible');
+    });
+  }
+});
+
+/* --- Panel Toggle Logic --- */
+document.addEventListener('DOMContentLoaded', () => {
+  const panel = document.getElementById('panel');
+  const toggleBtn = document.getElementById('toggle-panel-btn');
+  const closeBtn = document.getElementById('close-panel-btn');
+
+  // Toggle button (Top Left)
+  if (toggleBtn && panel) {
+    toggleBtn.addEventListener('click', () => {
+      panel.classList.toggle('is-closed');
+    });
+  }
+
+  // Close chevron (Inside Panel)
+  if (closeBtn && panel) {
+    closeBtn.addEventListener('click', () => {
+      panel.classList.add('is-closed');
+    });
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const leftHand = document.getElementById('left-hand');
+  const infoPanel = document.getElementById('panel');
+
+  // 1. Index Toggle (Left)
+  const toggleIndexBtn = document.getElementById('toggle-index-btn');
+  if (toggleIndexBtn) {
+    toggleIndexBtn.addEventListener('click', () => {
+      leftHand.classList.toggle('is-closed');
+      window.dispatchEvent(new Event('resize')); // Fix Three.js layout
+    });
+  }
+
+  // 2. Info Panel Toggle (Right)
+  const showPanelBtn = document.getElementById('show-panel-btn'); // From Navbar
+  const closePanelBtn = document.getElementById('close-panel-btn'); // Inside Panel
+
+  if (showPanelBtn) {
+    showPanelBtn.addEventListener('click', () => {
+      infoPanel.classList.remove('is-closed');
+      window.dispatchEvent(new Event('resize'));
+    });
+  }
+
+  if (closePanelBtn) {
+    closePanelBtn.addEventListener('click', () => {
+      infoPanel.classList.add('is-closed');
+      window.dispatchEvent(new Event('resize'));
+    });
+  }
+});
+
+
 })();
+
