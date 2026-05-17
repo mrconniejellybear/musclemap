@@ -20,39 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let isDragging = false;
 
-  // --- optional theme toggle (guarded) ---
-// --- Theme Toggle ---
-  // Updated IDs to match the index.html link tags
-  const darkSheet  = document.getElementById('dark-theme-sheet');
-  const lightSheet = document.getElementById('light-theme-sheet');
-  const themeToggleBtn  = document.getElementById('themeToggle');
-  
-  if (themeToggleBtn && darkSheet && lightSheet) {
-    // 1. Initial Load: Check localStorage
-    const savedTheme = localStorage.getItem('theme');
-    // If user prefers dark or system setting is dark, start dark
-    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      darkSheet.disabled = false;
-      lightSheet.disabled = true;
-    } else {
-      // Default to light (lightSheet is already enabled in HTML, darkSheet is disabled)
-      darkSheet.disabled = true;
-      lightSheet.disabled = false;
-    }
-    
-    // 2. Click Handler: Toggle
-    themeToggleBtn.addEventListener('click', () => {
-      const isCurrentlyDark = !darkSheet.disabled;
-      
-      // Toggle the state
-      darkSheet.disabled = isCurrentlyDark;
-      lightSheet.disabled = !isCurrentlyDark;
-      
-      const nextTheme = isCurrentlyDark ? 'light' : 'dark';
-      localStorage.setItem('theme', nextTheme);
-      console.log(`Theme toggled to: ${nextTheme}`);
-    });
-  }
 
   // ---------- Three.js Scene setup ----------
   const container = document.getElementById('three-container');
@@ -341,20 +308,33 @@ scene.traverse(o => {
   if (savedRadio) savedRadio.checked = true;
 
   // Load model
-  objLoader.load(
-    'Ecorche_by_AlexLashko.obj',
-    obj => {
-      model = obj;
-      // center model
-      const box = new THREE.Box3().setFromObject(obj);
-      const center = box.getCenter(new THREE.Vector3());
-      obj.position.sub(center);
-      obj.traverse(ch => {
-        if (ch.isMesh) {
-          ch.material = new THREE.MeshStandardMaterial({ roughness: 0.6, metalness: 0.1, color: 0xffffff });
-        }
-      });
-      scene.add(obj);
+objLoader.load(
+  'Ecorche_by_AlexLashko.obj',
+  obj => {
+    model = obj;
+    // center model
+    const box = new THREE.Box3().setFromObject(obj);
+    const center = box.getCenter(new THREE.Vector3());
+    obj.position.sub(center);
+    
+    obj.traverse(ch => {
+      if (ch.isMesh) {
+        ch.material = new THREE.MeshStandardMaterial({ roughness: 0.6, metalness: 0.1, color: 0xffffff });
+        
+        // NEW: Store the original position
+        ch.userData.originalPosition = ch.position.clone();
+
+        // NEW: Calculate the center of this specific mesh
+        ch.geometry.computeBoundingBox();
+        const meshCenter = new THREE.Vector3();
+        ch.geometry.boundingBox.getCenter(meshCenter);
+
+        // NEW: Since the whole body is centered at (0,0,0), the mesh's center 
+        // coordinates double as a directional vector pointing perfectly outward!
+        ch.userData.explodeDirection = meshCenter.clone().normalize();
+      }
+    });
+    scene.add(obj);
 
 
       // if a texture was requested before model loaded, apply it now
@@ -701,35 +681,64 @@ zoomOutBtn?.addEventListener('click', () => {
     renderer.render(scene, camera);
   })();
 
-  // ---- Rotation Slider Logic ----
-// ---- Rotation Slider Logic ----
+  // ---- Advanced Dual-Axis Anatomy Label Logic ----
   const rotationSlider = document.getElementById('rotation-slider');
-  const anatomicalLabel = document.getElementById('anatomical-label'); // <-- NEW
+  const anatomicalLabel = document.getElementById('anatomical-label');
   
-  // <-- NEW HELPER FUNCTION -->
-  function updateAnatomyLabel(degrees) {
-      if (!anatomicalLabel) return;
-      let direction = "";
-      if (degrees >= 315 || degrees < 45) direction = "Anterior";
-      else if (degrees >= 45 && degrees < 135) direction = "Right Lateral"; 
-      else if (degrees >= 135 && degrees < 225) direction = "Posterior";
-      else if (degrees >= 225 && degrees < 315) direction = "Left Lateral";
-      anatomicalLabel.textContent = direction;
-  }
-
-  // 1. Store the initial offset so "0" on the slider equals the "starting load angle"
+  // Base offset coordinates configured during initial load
   const startPos = new THREE.Vector3(0.6, 0.6, 2.3);
   const initialAzimuth = Math.atan2(startPos.x, startPos.z);
 
+  function updateAnatomyLabel() {
+      if (!anatomicalLabel || !camera || !controls) return;
+
+      // 1. Calculate vector from camera target to position
+      const offset = new THREE.Vector3().subVectors(camera.position, controls.target);
+      const spherical = new THREE.Spherical().setFromVector3(offset);
+
+      // 2. Extract angles in degrees for clean conditional branching
+      const polarDeg = THREE.MathUtils.radToDeg(spherical.phi);
+      
+      // Normalize azimuth relative to your initial starting offset position
+      let azimuthDiff = spherical.theta - initialAzimuth;
+      while (azimuthDiff < 0) azimuthDiff += Math.PI * 2;
+      while (azimuthDiff > Math.PI * 2) azimuthDiff -= Math.PI * 2;
+      const azimuthDeg = THREE.MathUtils.radToDeg(azimuthDiff);
+
+      let direction = "";
+
+      // 3. Vertical Threshold Check (Prioritize extreme vertical views)
+      if (polarDeg <= 35) {
+          direction = "Superior View";
+      } else if (polarDeg >= 145) {
+          direction = "Inferior View";
+      } else {
+          // 4. Horizontal Aspect Check (Standard Horizon Ring Views)
+          let verticalModifier = "";
+          if (polarDeg > 35 && polarDeg < 65) verticalModifier = "Superior-";
+          if (polarDeg > 115 && polarDeg < 145) verticalModifier = "Inferior-";
+
+          let horizontalView = "";
+          if (azimuthDeg >= 315 || azimuthDeg < 45) horizontalView = "Anterior";
+          else if (azimuthDeg >= 45 && azimuthDeg < 135) horizontalView = "Lateral (R)"; 
+          else if (azimuthDeg >= 135 && azimuthDeg < 225) horizontalView = "Posterior";
+          else if (azimuthDeg >= 225 && azimuthDeg < 315) horizontalView = "Lateral (L)";
+
+          direction = verticalModifier + horizontalView;
+      }
+
+      anatomicalLabel.textContent = direction;
+  }
+
+  // ---- Update Slider Input Callback ----
   rotationSlider?.addEventListener('input', (e) => {
     const deg = parseFloat(e.target.value);
-    
-    updateAnatomyLabel(deg); // <-- UPDATE LABEL ON SLIDER DRAG
-
     const radians = THREE.MathUtils.degToRad(deg);
+    
     const offset = new THREE.Vector3().subVectors(camera.position, controls.target);
     const spherical = new THREE.Spherical().setFromVector3(offset);
 
+    // Update horizontal plane value while preserving vertical tilt pitch
     spherical.theta = initialAzimuth + radians;
 
     offset.setFromSpherical(spherical);
@@ -737,24 +746,30 @@ zoomOutBtn?.addEventListener('click', () => {
     
     camera.lookAt(controls.target);
     controls.update();
-  });
-
-  // OPTIONAL: Update slider if user rotates manually with mouse
-  controls.addEventListener('change', () => {
-    if (document.activeElement === rotationSlider) return;
-
-    const offset = new THREE.Vector3().subVectors(camera.position, controls.target);
-    const spherical = new THREE.Spherical().setFromVector3(offset);
     
-    let angleDiff = spherical.theta - initialAzimuth;
-    while (angleDiff < 0) angleDiff += Math.PI * 2;
-    while (angleDiff > Math.PI * 2) angleDiff -= Math.PI * 2;
-
-    const deg = THREE.MathUtils.radToDeg(angleDiff);
-    rotationSlider.value = deg;
-
-    updateAnatomyLabel(deg); // <-- UPDATE LABEL ON MOUSE DRAG
+    // Recalculate dynamic text label positions
+    updateAnatomyLabel(); 
   });
 
-})();
+  // ---- Update Mouse Drag Orbit Control Event Listener ----
+  controls.addEventListener('change', () => {
+    // Sync slider track layout values if interaction originates dynamically via drag gestures
+    if (document.activeElement !== rotationSlider) {
+      const offset = new THREE.Vector3().subVectors(camera.position, controls.target);
+      const spherical = new THREE.Spherical().setFromVector3(offset);
+      
+      let angleDiff = spherical.theta - initialAzimuth;
+      while (angleDiff < 0) angleDiff += Math.PI * 2;
+      while (angleDiff > Math.PI * 2) angleDiff -= Math.PI * 2;
 
+      rotationSlider.value = THREE.MathUtils.radToDeg(angleDiff);
+    }
+
+    // Always update labels during active view alterations
+    updateAnatomyLabel();
+  });
+
+  // Run once explicitly at launch to correctly assign structural orientation string bounds
+  setTimeout(updateAnatomyLabel, 100);
+
+})(); // <--- This is the very end of your script file
